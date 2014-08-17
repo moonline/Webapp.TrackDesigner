@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>Packing list</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width">
+
+		<link rel="shortcut icon" href="./Resources/Img/appIcon-16.png" />
+
+		<!-- styles -->
+		<link href="Resources/Styles/browserReset.css" type="text/css" rel="stylesheet" />
+
+		<script src="Resources/Libraries/RequireJS/require.dev.js" data-main="Main.js"></script>
+
+	</head>
+	<body data-ng-view>
+		<form>
+			<input type="button" name="Straight" value="Straight" onclick="setRail('straight');">
+			<input type="button" name="Curve Left" value="Curve Left" onclick="setRail('curveLeft');">
+			<input type="button" name="Curve Right" value="Curve Right" onclick="setRail('curveRight');">
+			<input type="button" name="Draw" value="Draw" onclick="draw();">
+		</form>
+		<canvas id="canvas" width="800" height="800"></canvas>
+	</body>
+</html>
