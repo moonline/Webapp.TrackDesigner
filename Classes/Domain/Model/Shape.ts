@@ -1,18 +1,17 @@
 import Point = require("Classes/Domain/Model/Point");
 import ConnectionPoint = require("Classes/Domain/Model/ConnectionPoint");
 import Vector = require("Classes/Domain/Model/Vector");
+import ShapeType = require("Classes/Domain/Model/ShapeType");
 
 class Shape {
 	center: Point;
 	connectionPoints: ConnectionPoint[];
-	image: string;
-	shapeName: string;
+	type: ShapeType;
 
-	constructor(center: Point, connectionPoints: ConnectionPoint[] = [], shapeName: string = "", image: string = "") {
+	constructor(type: ShapeType, center: Point, connectionPoints: ConnectionPoint[] = []) {
+		this.type = type;
 		this.center = center;
 		this.connectionPoints = connectionPoints;
-		this.shapeName = shapeName;
-		this.image = image;
 	}
 	
 	public getConnectionPoints() {
@@ -32,7 +31,7 @@ class Shape {
 	}
 	
 	public toString(): string {
-		return this.shapeName+", position: "+this.center.toString();
+		return this.type.getName()+", position: "+this.center.toString();
 	}
 	
 	public getPosition(): Point {
