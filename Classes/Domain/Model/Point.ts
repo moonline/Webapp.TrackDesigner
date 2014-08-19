@@ -21,6 +21,10 @@ class Point {
 		return this.angle;
 	}
 	
+	public turnAngle(deltaAngle: number) {
+		this.angle += deltaAngle;
+	}
+	
 	public toString(): string {
 		return this.x+"/"+this.y+"/"+this.angle;
 	}
