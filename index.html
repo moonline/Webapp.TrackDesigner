@@ -11,9 +11,13 @@
 		<link href="Resources/Styles/browserReset.css" type="text/css" rel="stylesheet" />
 
 		<script src="Resources/Libraries/RequireJS/require.dev.js" data-main="Main.js"></script>
-
+		<style>
+			img.track { height: 4rem; width: auto; display: inline-block; margin: 0.5rem; }
+		</style>
 	</head>
 	<body data-ng-view>
+		<img class="track" src="Resources/Img/Tracks/railStraight.png" />
+		<img class="track" src="Resources/Img/Tracks/railCurved.png" />
 		<form>
 			<input type="button" name="Straight" value="Straight" onclick="setRail('straight');">
 			<input type="button" name="Curve Left" value="Curve Left" onclick="setRail('curveLeft');">

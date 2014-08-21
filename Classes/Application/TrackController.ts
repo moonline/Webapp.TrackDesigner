@@ -26,7 +26,8 @@ class TrackController {
 		var rail2: Shape = Shape.createFromConnectionPoint(railStraight, rail1.getConnectionPoints()[1]);
 		var rail3: Shape = Shape.createFromConnectionPoint(railCurved, rail2.getConnectionPoints()[1]);
 		var rail4: Shape = Shape.createFromConnectionPoint(railCurved, rail3.getConnectionPoints()[1]);
-		var rail5: Shape = Shape.createFromConnectionPoint(railCurved, rail4.getConnectionPoints()[1]);
+		var rail45: Shape = Shape.createFromConnectionPoint(railStraight, rail4.getConnectionPoints()[1]);
+		var rail5: Shape = Shape.createFromConnectionPoint(railCurved, rail45.getConnectionPoints()[1]);
 		var rail6: Shape = Shape.createFromConnectionPoint(railCurved, rail5.getConnectionPoints()[1]);
 		var rail7: Shape = Shape.createFromConnectionPoint(railStraight, rail6.getConnectionPoints()[1]);
 		var rail8: Shape = Shape.createFromConnectionPoint(railStraight, rail7.getConnectionPoints()[1]);
@@ -34,6 +35,7 @@ class TrackController {
 		this.layout.addShape(rail2);
 		this.layout.addShape(rail3);
 		this.layout.addShape(rail4);
+		this.layout.addShape(rail45);
 		this.layout.addShape(rail5);
 		this.layout.addShape(rail6);
 		this.layout.addShape(rail7);
@@ -50,13 +52,15 @@ class TrackController {
 				"Rail straight",
 				[new Vector(63.8, 0.0, 0.0), new Vector(63.8, 0.5, 0.5)],
 				127.6,
-				63.8
+				95.7,
+				"Resources/Img/Tracks/railStraight.png"
 			),
 			railCurved: new ShapeType(
 				"Rail curved",
 				[new Vector(62.3424, 0.9906, 0.96875),new Vector(62.3424, 0.5094, 0.53125)],
 				136.9144,
-				69.9295				
+				69.9295,
+				"Resources/Img/Tracks/railCurved.png"		
 			)
 		};			
 	}

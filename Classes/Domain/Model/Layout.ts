@@ -21,13 +21,10 @@ class Layout {
 			
 			this.drawPoint(shape.getPosition(), 2);
 			if(shape.getType().getImagePath() != "") {
-				//var img: Image = new Image;
-				//img.src = shape.getType().getImagePath();
+				var img: HTMLImageElement = new Image;
+				img.src = shape.getType().getImagePath();
 				
-				// TODO: calc image startPosition and angle
-				// http://stackoverflow.com/questions/3793397/html5-canvas-drawimage-with-at-an-angle
-				
-				//canvas.drawImage(img,10,10,100,100)
+				this.drawRotatedImage(img, shape.getPosition(), shape.getType().getWidth(), shape.getType().getHeight());
 			}			
 			
 			var connectionPoints: ConnectionPoint[] = shape.getConnectionPoints();
@@ -59,6 +56,23 @@ class Layout {
 	
 	public addShape(shape: Shape): void {		
 		this.shapes.push(shape);
+	}
+	
+	private drawRotatedImage(image: HTMLImageElement, position: Point, width: number, height: number) {	
+		// save the current co-ordinate system before we screw with it
+		this.canvas.save(); 
+	
+		// move to the middle of where we want to draw our image
+		this.canvas.translate(position.getX()*this.factor, position.getY()*this.factor);
+	
+		// rotate around that point, converting our angle from degrees to radians 
+		this.canvas.rotate(position.getAngle()*Math.PI*2);
+	
+		// draw it up and to the left by half the width and height of the image 
+		this.canvas.drawImage(image, -(width/2)*this.factor, -(height/2)*this.factor, width*this.factor, height*this.factor);
+	
+		// and restore the co-ords to how they were when we began
+		this.canvas.restore(); 
 	}
 }
 
