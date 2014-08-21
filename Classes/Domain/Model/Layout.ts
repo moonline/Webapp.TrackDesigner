@@ -7,12 +7,14 @@ class Layout {
 	startElements: Shape[]; 
 	shapes: Shape[];
 	factor: number;
+	currentElement: any = null;
 	
 	constructor(canvasElement: HTMLCanvasElement, factor: number = 1) {
 		this.canvas = canvasElement.getContext('2d');
 		this.startElements = [];
 		this.shapes = [];
 		this.factor = factor;
+		this.currentElement = this;
 	}
 	
 	public draw(): void {

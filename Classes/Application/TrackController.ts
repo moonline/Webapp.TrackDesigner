@@ -5,15 +5,17 @@ import ConnectionPoint = require("Classes/Domain/Model/ConnectionPoint");
 import Vector = require("Classes/Domain/Model/Vector");
 import Layout = require("Classes/Domain/Model/Layout");
 
+import AddShapeCommand = require("Classes/Application/UI/AddShapeCommand");
+
 class TrackController {
 	shapeTypes: { [index: string]: ShapeType; } = {};
 	layout: Layout;
 	startingElements: Shape[];
 	
 	constructor() {
-		this.shapeTypes = this.createShapeTypes();
-		
+		this.shapeTypes = this.createShapeTypes();		
 		this.layout = new Layout(<HTMLCanvasElement>document.getElementById('canvas'), 0.5);
+		this.bindUI();
 	
 		var railStraight: ShapeType = this.shapeTypes['railStraight'];
 		var railCurved: ShapeType = this.shapeTypes['railCurved'];
@@ -25,16 +27,21 @@ class TrackController {
 		this.layout.addStartShape(rail1);		
 		
 		var rail2: Shape = Shape.createFromConnectionPoint(railStraight, rail1.getConnectionPoints()[1]);
-		var rail3: Shape = Shape.createFromConnectionPoint(railCurved, rail2.getConnectionPoints()[1]);
-		var rail4: Shape = Shape.createFromConnectionPoint(railCurved, rail3.getConnectionPoints()[1]);
-		var rail45: Shape = Shape.createFromConnectionPoint(railStraight, rail4.getConnectionPoints()[1]);
-		var rail5: Shape = Shape.createFromConnectionPoint(railCurved, rail45.getConnectionPoints()[1]);
-		var rail6: Shape = Shape.createFromConnectionPoint(railCurved, rail5.getConnectionPoints()[1]);
-		var rail7: Shape = Shape.createFromConnectionPoint(railStraight, rail6.getConnectionPoints()[1]);
-		var rail8: Shape = Shape.createFromConnectionPoint(railStraight, rail7.getConnectionPoints()[1]);
-		var switch1: Shape = Shape.createFromConnectionPoint(switchStraight, rail8.getConnectionPoints()[1]);
-		var rail9: Shape = Shape.createFromConnectionPoint(railCurved, switch1.getConnectionPoints()[1]);
-		var rail10: Shape = Shape.createFromConnectionPoint(railStraight, switch1.getConnectionPoints()[2]);
+		var rail3: Shape = Shape.createFromShape(railCurved, rail2);
+		rail3.rotate();
+		var rail4: Shape = Shape.createFromShape(railCurved, rail3);
+		var rail45: Shape = Shape.createFromShape(railStraight, rail4);
+		var rail5: Shape = Shape.createFromShape(railCurved, rail45);
+		var rail6: Shape = Shape.createFromShape(railCurved, rail5);
+		var rail7: Shape = Shape.createFromShape(railStraight, rail6);
+		var rail8: Shape = Shape.createFromShape(railStraight, rail7);
+		var switch1: Shape = Shape.createFromShape(switchStraight, rail8);
+		var rail9: Shape = Shape.createFromShape(railCurved, switch1);
+		var rail10: Shape = Shape.createFromShape(railCurved, switch1);			
+		rail10.rotate();		
+		var rail11: Shape = Shape.createFromShape(railCurved, rail10);
+		rail11.rotate();
+		var rail12: Shape = Shape.createFromShape(railCurved, rail9);
 		
 		this.layout.addShape(rail2);
 		this.layout.addShape(rail3);
@@ -47,6 +54,8 @@ class TrackController {
 		this.layout.addShape(switch1);
 		this.layout.addShape(rail9);
 		this.layout.addShape(rail10);
+		this.layout.addShape(rail11);
+		this.layout.addShape(rail12);
 		
 		this.layout.draw();
 		
@@ -77,6 +86,13 @@ class TrackController {
 				"Resources/Img/Tracks/switchStraight.png"
 			)
 		};			
+	}
+	
+	private bindUI() {
+		var addShapeCommand: AddShapeCommand = new AddShapeCommand(this.layout);
+		var buttonAddShape: HTMLElement = document.getElementById('addShapeButton');
+		buttonAddShape.onclick = function() { addShapeCommand.execute(); }
+		buttonAddShape.disabled = !addShapeCommand.isExecutable();
 	}
 }
 

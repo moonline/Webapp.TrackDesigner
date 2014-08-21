@@ -16,6 +16,15 @@ class Shape {
 		return newShape;
 	}
 	
+	public static createFromShape(type: ShapeType, shape: Shape): Shape {
+		var connectionPoint: ConnectionPoint = shape.getNextFreeConnectionPoint();
+		if(connectionPoint != null) {
+			return Shape.createFromConnectionPoint(type, connectionPoint);
+		} else {
+			return null;
+		}
+	}
+	
 
 	center: Point;
 	connectionPoints: ConnectionPoint[];
@@ -55,32 +64,49 @@ class Shape {
 		return this.type;
 	}
 	
-	public canRotate(): boolean {
-		var numberOfConnectedPoints: number = 0;
+	private canRotate(): boolean {
+		return this.getConnectedPoints().length == 1;
+	}
+	
+	private getConnectedPoints(): ConnectionPoint[] {
+		var connectedPoints: ConnectionPoint[] = [];
 		for(var i in this.connectionPoints) {
 			if(this.connectionPoints[i].connection != null) {
-				numberOfConnectedPoints++;
+				connectedPoints.push(this.connectionPoints[i]);
 			}
 		}
-		return numberOfConnectedPoints == 1;
-		
+		return connectedPoints;
 	}
 	
 	/*public remove(): void {
 	
 	}*/
 	
-	/*public rotate(): void {
-		if(this.canRotate()) {
+	/**
+	 * unbind old connectionPoint and bind new point
+	 */
+	public rotate(): void {
+		var connectedPoints: ConnectionPoint[] = this.getConnectedPoints();
+		if(connectedPoints.length == 1) {
+			// unbind old point
+			var currentConnectionPoint: ConnectionPoint = connectedPoints[0];
+			var connectedNeighbor = currentConnectionPoint.getConnection();
+			var newConnectionPoint: ConnectionPoint = this.getNextFreeConnectionPoint(currentConnectionPoint);
+			currentConnectionPoint.removeConnection();
 			
+			// recalc new center, set new connection
+			var position: Point = connectedNeighbor.getPosition();
+			position.turnAngle(0.5);
+			this.center = newConnectionPoint.getIncrementalPosition().getStartPosition(position);
+			newConnectionPoint.connectTo(connectedNeighbor);
 		}
-	}*/
+	}
 	
 	/**
 	 * iterate through connection points, starting by the position of the given ConnectionPoint or 0
 	 * @return ConnectionPoint first element without a connection
 	 */
-	private getNextFreeConnectionPoint(connectionPoint: ConnectionPoint = null): ConnectionPoint {
+	public getNextFreeConnectionPoint(connectionPoint: ConnectionPoint = null): ConnectionPoint {
 		var startPosition: number;
 		if(connectionPoint == null) {
 			startPosition = 0;
