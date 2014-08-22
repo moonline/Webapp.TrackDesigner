@@ -19,12 +19,13 @@ class TrackController {
 	
 		var railStraight: ShapeType = this.shapeTypes['railStraight'];
 		var railCurved: ShapeType = this.shapeTypes['railCurved'];
-		var switchStraight: ShapeType = this.shapeTypes['switchStraight'];
+		var switchStraightLeft: ShapeType = this.shapeTypes['switchStraightLeft'];
+		var switchStraightRight: ShapeType = this.shapeTypes['switchStraightRight'];
 		
 		var rail1:Shape = new Shape(railStraight,new Point(200,200),[]);
 		rail1.createConnectionPoint(railStraight.connectionPoints[1]);
 		rail1.createConnectionPoint(railStraight.connectionPoints[0]);
-		this.layout.addStartShape(rail1);		
+		this.layout.addShape(rail1);		
 		
 		var rail2: Shape = Shape.createFromConnectionPoint(railStraight, rail1.getConnectionPoints()[1]);
 		var rail3: Shape = Shape.createFromShape(railCurved, rail2);
@@ -35,13 +36,14 @@ class TrackController {
 		var rail6: Shape = Shape.createFromShape(railCurved, rail5);
 		var rail7: Shape = Shape.createFromShape(railStraight, rail6);
 		var rail8: Shape = Shape.createFromShape(railStraight, rail7);
-		var switch1: Shape = Shape.createFromShape(switchStraight, rail8);
+		var switch1: Shape = Shape.createFromShape(switchStraightLeft, rail8);
 		var rail9: Shape = Shape.createFromShape(railCurved, switch1);
 		var rail10: Shape = Shape.createFromShape(railCurved, switch1);			
 		rail10.rotate();		
 		var rail11: Shape = Shape.createFromShape(railCurved, rail10);
 		rail11.rotate();
 		var rail12: Shape = Shape.createFromShape(railCurved, rail9);
+		var switch2: Shape = Shape.createFromShape(switchStraightRight, rail12);
 		
 		this.layout.addShape(rail2);
 		this.layout.addShape(rail3);
@@ -56,6 +58,8 @@ class TrackController {
 		this.layout.addShape(rail10);
 		this.layout.addShape(rail11);
 		this.layout.addShape(rail12);
+		this.layout.removeShape(rail5);
+		this.layout.addShape(switch2);
 		
 		this.layout.draw();
 		
@@ -78,12 +82,19 @@ class TrackController {
 				100.91007, // 69.9295
 				"Resources/Img/Tracks/railCurved.png"		
 			),
-			switchStraight: new ShapeType(
-				"Switch straight",
+			switchStraightLeft: new ShapeType(
+				"Switch straight left",
 				[new Vector(131.52707, 0.03899, 0.0),new Vector(131.52707, 0.46101, 0.5),new Vector(131.52707, 0.96101, 0.0)],
 				255.2,
 				159.5,
-				"Resources/Img/Tracks/switchStraight.png"
+				"Resources/Img/Tracks/switchStraightLeft.png"
+			),
+			switchStraightRight: new ShapeType(
+				"Switch straight right",
+				[new Vector(131.52707, 0.03899, 0.0),new Vector(131.52707, 0.46101, 0.5),new Vector(131.52707, 0.53899, 0.0)],
+				255.2,
+				159.5,
+				"Resources/Img/Tracks/switchStraightRight.png"
 			)
 		};			
 	}

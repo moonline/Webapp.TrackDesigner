@@ -45,6 +45,13 @@ class Shape {
 		this.connectionPoints.push(point);
 	}
 	
+	public removeConnectionPoints(): void {
+		for(var i in this.connectionPoints) {
+			this.connectionPoints[i].removeConnection();
+		}
+		this.connectionPoints = null;
+	}
+	
 	public createConnectionPoint(position: Vector, connection: ConnectionPoint = null) {
 		var connectionPoint: ConnectionPoint = new ConnectionPoint(
 			this, position, connection

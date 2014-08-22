@@ -51,13 +51,16 @@ class Layout {
 		this.canvas.stroke();
 	}
 	
-	public addStartShape(shape: Shape): void {
-		this.shapes.push(shape);
-		this.startElements.push(shape);
-	}
-	
 	public addShape(shape: Shape): void {		
 		this.shapes.push(shape);
+	}
+	
+	public removeShape(shape: Shape): void {
+		shape.removeConnectionPoints();
+		var pos: number = this.shapes.indexOf(shape);
+		// TODO
+		this.shapes.splice(pos, 1);
+		shape = null;
 	}
 	
 	private drawRotatedImage(image: HTMLImageElement, position: Point, width: number, height: number) {	
