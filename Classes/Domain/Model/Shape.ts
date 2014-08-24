@@ -78,11 +78,20 @@ class Shape {
 	private getConnectedPoints(): ConnectionPoint[] {
 		var connectedPoints: ConnectionPoint[] = [];
 		for(var i in this.connectionPoints) {
-			if(this.connectionPoints[i].connection != null) {
+			if(this.connectionPoints[i].getConnection() != null) {
 				connectedPoints.push(this.connectionPoints[i]);
 			}
 		}
 		return connectedPoints;
+	}
+	
+	public getFirstNeighbor(): Shape {
+		for(var i in this.connectionPoints) {
+			if(this.connectionPoints[i].connection != null) {
+				return this.connectionPoints[i].getConnection().getShape();
+			}
+		}
+		return null;
 	}
 	
 	/*public remove(): void {

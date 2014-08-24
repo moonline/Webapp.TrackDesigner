@@ -27,8 +27,10 @@ class ConnectionPoint {
 	}
 	
 	public removeConnection():void {
-		this.connection.setConnection(null);
-		this.connection = null;
+		if(this.connection != null) {
+			this.connection.setConnection(null);
+			this.connection = null;
+		}
 	}
 	
 	public getShape(): Shape {

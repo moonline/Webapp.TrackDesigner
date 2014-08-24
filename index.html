@@ -10,23 +10,42 @@
 		<!-- styles -->
 		<link href="Resources/Styles/browserReset.css" type="text/css" rel="stylesheet" />
 
-		<script src="Resources/Libraries/RequireJS/require.dev.js" data-main="Main.js"></script>
+		
 		<style>
 			img.track { height: 4rem; width: auto; display: inline-block; margin: 0.5rem; }
+			img.smallTrack { height: 1px; width: auto; }
 		</style>
 	</head>
 	<body data-ng-view>
-		<img class="track" src="Resources/Img/Tracks/railStraight.png" />
-		<img class="track" src="Resources/Img/Tracks/railCurved.png" />
-		<img class="track" src="Resources/Img/Tracks/switchStraightLeft.png" />
-		<img class="track" src="Resources/Img/Tracks/switchStraightRight.png" />
-		<form>
-			<input type="Button" name="addShape" value="(+) Shape" id="addShapeButton" />
-			<input type="button" name="Straight" value="Straight" onclick="setRail('straight');">
-			<input type="button" name="Curve Left" value="Curve Left" onclick="setRail('curveLeft');">
-			<input type="button" name="Curve Right" value="Curve Right" onclick="setRail('curveRight');">
-			<input type="button" name="Draw" value="Draw" onclick="draw();">
-		</form>
-		<canvas id="canvas" width="800" height="800"></canvas>
+		<header>
+			<div id="shapeTypes">
+			
+			</div>
+		</header>
+		<div class="content">
+			<div id="toolbar">
+				<button id="buttonRemove">delete shape</button>
+				<button id="buttonRotate">rotate shape</button>
+				
+				<img class="smallTrack" src="Resources/Img/Tracks/railStraight.png" />
+				<img class="smallTrack" src="Resources/Img/Tracks/railCurved.png" />
+				<img class="smallTrack" src="Resources/Img/Tracks/switchStraightLeft.png" />
+				<img class="smallTrack" src="Resources/Img/Tracks/switchStraightRight.png" />
+			</div>
+			<!--<form>
+				<input type="Button" name="addShape" value="(+) Shape" id="addShapeButton" />
+				<input type="button" name="Straight" value="Straight" onclick="setRail('straight');">
+				<input type="button" name="Curve Left" value="Curve Left" onclick="setRail('curveLeft');">
+				<input type="button" name="Curve Right" value="Curve Right" onclick="setRail('curveRight');">
+				<input type="button" name="Draw" value="Draw" onclick="draw();">
+			</form>-->
+			<canvas id="layoutArea" width="800" height="800"></canvas>
+		</div>
+		<footer>
+			<div id="shapeTypeVariants">
+			
+			</div>
+		</footer>
+		<script src="Resources/Libraries/RequireJS/require.dev.js" data-main="Main.js"></script>
 	</body>
 </html>
