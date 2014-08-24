@@ -67,12 +67,26 @@ class DesignerView {
 		this.elements['buttonRemove'].addEventListener('click', function(event) {
 			this.layout.removeCurrentShape();
 			this.draw();
+		}.bind(this));		
+		
+		document.body.addEventListener('keydown', function(event) {
+			if (event.keyCode === event.DOM_VK_BACK_SPACE || event.keyCode === 8 || event.keyCode === event.DOM_VK_DELETE || event.keyCode === 46) {
+				this.layout.removeCurrentShape();
+				this.draw();
+			}
 		}.bind(this));
 		
 		this.elements['buttonRotate'] = <HTMLElement>document.getElementById('buttonRotate');
 		this.elements['buttonRotate'].addEventListener('click', function(event) {
 			this.layout.rotateCurrentShape();
 			this.draw();
+		}.bind(this));
+		
+		document.body.addEventListener('keypress', function(event) {
+			if (String.fromCharCode(event.charCode) === 'r') {
+				this.layout.rotateCurrentShape();
+				this.draw();
+			}
 		}.bind(this));
 		
 		this.draw();

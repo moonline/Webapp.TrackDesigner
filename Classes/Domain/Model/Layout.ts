@@ -24,6 +24,7 @@ class Layout {
 		if(shape.getPosition().getY() < shape.getType().getWidth()/2+shape.getType().getHeight()/2) {
 			this.moveShapes(0, shape.getType().getWidth()+shape.getType().getHeight());
 		}
+		this.connectNearConnectionPoint(shape);
 	}
 	
 	private moveShapes(deltaX: number, deltaY: number) {
@@ -68,6 +69,25 @@ class Layout {
 			}
 		}
 		this.currentElement = position;
+	}
+	
+	private connectNearConnectionPoint(shape: Shape): ConnectionPoint {
+		var connectionPoints: ConnectionPoint[] = shape.getConnectionPoints();
+		for(var cpi in connectionPoints) {
+			if(connectionPoints[cpi].getConnection() == null) {
+				for(var spi in this.shapes) {
+					if(shape != this.shapes[spi]) {
+						var shapeConnectionPoints: ConnectionPoint[] = this.shapes[spi].getConnectionPoints();
+						for(var scpi in shapeConnectionPoints) {
+							if(connectionPoints[cpi].getPosition().equals(shapeConnectionPoints[scpi].getPosition()) && shapeConnectionPoints[scpi].getConnection() == null) {
+								connectionPoints[cpi].connectTo(shapeConnectionPoints[scpi]);
+								return shapeConnectionPoints[scpi];
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 }
 

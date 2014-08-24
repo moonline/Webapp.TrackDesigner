@@ -136,25 +136,27 @@ class Shape {
 	 * @return ConnectionPoint first element without a connection
 	 */
 	public getNextFreeConnectionPoint(connectionPoint: ConnectionPoint = null): ConnectionPoint {
-		var startPosition: number;
-		if(connectionPoint == null) {
-			startPosition = 0;
-		} else {
-			var pos: number = this.connectionPoints.indexOf(connectionPoint);
-			startPosition = (pos >= 0) ? pos : 0;
-		}		
-		
-		var rotatePosition: number = startPosition;
-		for(var i = 0; i<this.connectionPoints.length; i++) {
-			// TODO return of empty place found
-			if(this.connectionPoints[rotatePosition].connection == null) {
-				return this.connectionPoints[rotatePosition];
-			}			
-			if(rotatePosition < this.connectionPoints.length-1) {
-				rotatePosition++;
+		if(this.connectionPoints != null) {
+			var startPosition: number;
+			if(connectionPoint == null) {
+				startPosition = 0;
 			} else {
-				rotatePosition = 0;
-			}			
+				var pos: number = this.connectionPoints.indexOf(connectionPoint);
+				startPosition = (pos >= 0) ? pos : 0;
+			}		
+			
+			var rotatePosition: number = startPosition;
+			for(var i = 0; i < this.connectionPoints.length; i++) {
+				// TODO return of empty place found
+				if(this.connectionPoints[rotatePosition].connection == null) {
+					return this.connectionPoints[rotatePosition];
+				}			
+				if(rotatePosition < this.connectionPoints.length-1) {
+					rotatePosition++;
+				} else {
+					rotatePosition = 0;
+				}			
+			}
 		}
 		return null;
 	}

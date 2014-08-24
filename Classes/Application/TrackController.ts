@@ -17,7 +17,8 @@ class TrackController {
 	
 	public designerAction(): void {
 		var layout: Layout = new Layout();
-		this.createDummyTracks(layout);
+		layout.addShape(Shape.createShape(this.shapeTypes['railStraight'], new Point(200,200)));
+		//this.createDummyTracks(layout);
 		var designerView: DesignerView = new DesignerView(layout, this.shapeTypes);
 	}
 	
@@ -32,7 +33,7 @@ class TrackController {
 		rail1.createConnectionPoint(railStraight.connectionPoints[0]);
 		layout.addShape(rail1);		
 		
-		/*var rail2: Shape = Shape.createFromConnectionPoint(railStraight, rail1.getConnectionPoints()[1]);
+		var rail2: Shape = Shape.createFromConnectionPoint(railStraight, rail1.getConnectionPoints()[1]);
 		var rail3: Shape = Shape.createFromShape(railCurved, rail2);
 		rail3.rotate();
 		
@@ -67,7 +68,7 @@ class TrackController {
 		layout.addShape(rail11);
 		layout.addShape(rail12);
 		layout.removeShape(rail5);
-		layout.addShape(switch2);*/
+		layout.addShape(switch2);
 	}
 	
 	private createShapeTypes(): any {
@@ -95,7 +96,7 @@ class TrackController {
 			),
 			switchStraightRight: new ShapeType(
 				"Switch straight right",
-				[new Vector(131.52707, 0.03899, 0.0),new Vector(131.52707, 0.46101, 0.5),new Vector(131.52707, 0.53899, 0.0)],
+				[new Vector(131.52707, 0.03899, 0.0),new Vector(131.52707, 0.46101, 0.5),new Vector(131.52707, 0.53899, 0.5)],
 				255.2,
 				159.5,
 				"Resources/Img/Tracks/switchStraightRight.png"

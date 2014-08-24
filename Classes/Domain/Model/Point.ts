@@ -35,6 +35,10 @@ class Point {
 		this.y += deltyY;
 	}
 	
+	public equals(point: Point) {
+		return Math.round(point.getX()) == Math.round(this.x) && Math.round(point.getY()) == Math.round(this.y);
+	}
+	
 	public toString(): string {
 		return this.x+"/"+this.y+"/"+this.angle;
 	}
