@@ -37,6 +37,7 @@ class Layout {
 		if(this.currentElement != null) {
 			if(this.currentElement instanceof Shape) {
 				this.currentElement.rotate();
+				this.connectNearConnectionPoint(this.currentElement);
 			}
 		}
 	}

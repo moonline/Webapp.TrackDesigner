@@ -89,6 +89,11 @@ class DesignerView {
 			}
 		}.bind(this));
 		
+		this.elements['buttonExport'] = <HTMLElement>document.getElementById('buttonExport');
+		this.elements['buttonExport'].addEventListener('click', function(event) {
+			this.exportLayout();
+		}.bind(this));
+		
 		this.draw();
 	}
 	
@@ -157,6 +162,13 @@ class DesignerView {
 	
 		// and restore the co-ords to how they were when we began
 		this.canvas.restore(); 
+	}
+	
+	private exportLayout(): void {
+		window.open(
+			(<HTMLCanvasElement>this.elements['canvas']).toDataURL("image/png"),
+			'_blank'
+		);
 	}
 }
 
