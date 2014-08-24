@@ -17,7 +17,8 @@ class DesignerView {
 		this.viewConfig = {
 			shapePointSize: 50,
 			connectionPointSize: 10,
-			connectedPointSize: 2
+			connectedPointSize: 2,
+			freePointSize: 10
 		}
 	
 		this.layout = layout;
@@ -47,7 +48,12 @@ class DesignerView {
 			button.innerHTML = '<img class="track" src="'+shapeType.getImagePath()+'" alt="'+shapeType.getName()+'" />';
 			
 			button.addEventListener('click', function(event) {
-				var shape: Shape = Shape.createFromShape(shapeType, this.layout.getCurrentElement());
+				var shape: Shape;
+				if(this.layout.getCurrentElement() instanceof Shape) {
+					var shape: Shape = Shape.createFromShape(shapeType, this.layout.getCurrentElement());
+				} else if(this.layout.getCurrentElement() instanceof Point) {
+					var shape: Shape = Shape.createShape(shapeType, this.layout.getCurrentElement());
+				}
 				if(shape != null) {
 					this.layout.addShape(shape);
 					this.draw();
@@ -74,6 +80,11 @@ class DesignerView {
 	
 	public draw(): void {
 		this.canvas.clearRect(0, 0, (<HTMLCanvasElement>this.elements['canvas']).width, (<HTMLCanvasElement>this.elements['canvas']).height);
+		
+		if(this.layout.getCurrentElement() instanceof Point) {
+			this.drawPoint(this.layout.getCurrentElement(), this.viewConfig.freePointSize, "rgb(255,140,0)", "rgb(255,140,0)");
+		}
+		
 		for(var si in this.layout.shapes) {
 			var shape: Shape = this.layout.shapes[si];
 			

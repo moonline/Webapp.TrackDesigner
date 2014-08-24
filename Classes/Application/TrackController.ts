@@ -32,7 +32,7 @@ class TrackController {
 		rail1.createConnectionPoint(railStraight.connectionPoints[0]);
 		layout.addShape(rail1);		
 		
-		var rail2: Shape = Shape.createFromConnectionPoint(railStraight, rail1.getConnectionPoints()[1]);
+		/*var rail2: Shape = Shape.createFromConnectionPoint(railStraight, rail1.getConnectionPoints()[1]);
 		var rail3: Shape = Shape.createFromShape(railCurved, rail2);
 		rail3.rotate();
 		
@@ -67,7 +67,7 @@ class TrackController {
 		layout.addShape(rail11);
 		layout.addShape(rail12);
 		layout.removeShape(rail5);
-		layout.addShape(switch2);
+		layout.addShape(switch2);*/
 	}
 	
 	private createShapeTypes(): any {

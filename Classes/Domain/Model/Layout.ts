@@ -18,6 +18,18 @@ class Layout {
 	public addShape(shape: Shape): void {
 		this.shapes.push(shape);
 		this.currentElement = shape;
+		if(shape.getPosition().getX() < shape.getType().getWidth()/2+shape.getType().getHeight()/2) {
+			this.moveShapes(shape.getType().getWidth()+shape.getType().getHeight(), 0);
+		}
+		if(shape.getPosition().getY() < shape.getType().getWidth()/2+shape.getType().getHeight()/2) {
+			this.moveShapes(0, shape.getType().getWidth()+shape.getType().getHeight());
+		}
+	}
+	
+	private moveShapes(deltaX: number, deltaY: number) {
+		for(var spi in this.shapes) {
+			this.shapes[spi].move(deltaX, deltaY);
+		}
 	}
 	
 	public rotateCurrentShape(): void {
@@ -55,7 +67,7 @@ class Layout {
 				return;
 			}
 		}
-		this.currentElement = null;
+		this.currentElement = position;
 	}
 }
 

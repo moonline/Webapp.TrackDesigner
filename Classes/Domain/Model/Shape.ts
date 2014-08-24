@@ -25,6 +25,14 @@ class Shape {
 		}
 	}
 	
+	public static createShape(type: ShapeType, center: Point) {
+		var newShape: Shape = new Shape(type, center);
+		for(var i in type.connectionPoints) {
+			newShape.createConnectionPoint(type.connectionPoints[i]);
+		}
+		return newShape;
+	}
+	
 
 	center: Point;
 	connectionPoints: ConnectionPoint[];
@@ -34,10 +42,23 @@ class Shape {
 		this.type = type;
 		this.center = center;
 		this.connectionPoints = connectionPoints;
-	}	
+	}
+	
+	public getPosition(): Point {
+		return this.center;
+	}
+	
+	public getType(): ShapeType {
+		return this.type;
+	}
 	
 	public getConnectionPoints(): ConnectionPoint[] {
 		return this.connectionPoints;
+	}
+	
+	
+	public move(deltaX: number, deltaY: number): void {
+		this.center.move(deltaX, deltaY);
 	}
 	
 	public addConnectionPoint(point: ConnectionPoint): void {
@@ -61,14 +82,6 @@ class Shape {
 	
 	public toString(): string {
 		return this.type.getName()+", position: "+this.center.toString();
-	}
-	
-	public getPosition(): Point {
-		return this.center;
-	}
-	
-	public getType(): ShapeType {
-		return this.type;
 	}
 	
 	private canRotate(): boolean {

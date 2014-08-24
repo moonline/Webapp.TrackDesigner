@@ -30,6 +30,11 @@ class Point {
 		return (Math.abs(this.y - position.getY()) < radius && Math.abs(this.x - position.getX()) < radius);
 	}
 	
+	public move(deltaX: number, deltyY: number): void {
+		this.x += deltaX;
+		this.y += deltyY;
+	}
+	
 	public toString(): string {
 		return this.x+"/"+this.y+"/"+this.angle;
 	}
