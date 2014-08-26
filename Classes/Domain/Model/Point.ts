@@ -2,7 +2,6 @@ class Point {
 	x: number;
 	y: number;
 	angle: number; // turn, 1=360°
-	radius: number;
 
 	constructor(x: number = 0, y: number = 0, angle: number = 0) {
 		this.x = x;
