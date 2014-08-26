@@ -4,6 +4,8 @@ import ConnectionPoint = require("Classes/Domain/Model/ConnectionPoint");
 import ShapeType = require("Classes/Domain/Model/ShapeType");
 import Shape = require("Classes/Domain/Model/Shape");
 import Layout = require("Classes/Domain/Model/Layout");
+import VariantType = require("Classes/Domain/Model/VariantType");
+import Variant = require("Classes/Domain/Model/Variant");
 
 class DesignerView {
 	viewConfig: any;
@@ -12,8 +14,9 @@ class DesignerView {
 	canvas: CanvasRenderingContext2D;
 	layout: Layout;
 	shapeTypes: { [index: string]: ShapeType; } = {};
+	variantTypes: { [index: string]: VariantType; } = {};
 	
-	constructor(layout: Layout, shapeTypes: { [index: string]: ShapeType; }) {
+	constructor(layout: Layout, shapeTypes: { [index: string]: ShapeType; }, variantTypes: { [index: string]: VariantType; }) {
 		this.viewConfig = {
 			shapePointSize: 50,
 			connectionPointSize: 10,
@@ -23,6 +26,7 @@ class DesignerView {
 	
 		this.layout = layout;
 		this.shapeTypes = shapeTypes;
+		this.variantTypes = variantTypes
 		this.factor = 0.5;
 		
 		this.initializeView();
@@ -41,22 +45,42 @@ class DesignerView {
 		
 		this.canvas = (<HTMLCanvasElement>this.elements['canvas']).getContext('2d');
 		
+		this.elements['variantTypes'] = <HTMLElement>document.getElementById('variantTypes');
+		Object.keys(this.variantTypes).forEach(function(key) {
+			var variantType: VariantType = this.variantTypes[key];
+			var option = document.createElement('option');
+			if(variantType.getName() == "Default") {
+				option.selected = true;
+			}
+			option.value = key;
+			option.text = variantType.getName();
+			
+			this.elements['variantTypes'].appendChild(option);
+		}.bind(this));
+		
 		this.elements['shapeTypes'] = <HTMLElement>document.getElementById('shapeTypes');
 		Object.keys(this.shapeTypes).forEach(function(key) {
 			var shapeType: ShapeType = this.shapeTypes[key];
 			var button = document.createElement('button');
-			button.innerHTML = '<img class="track" src="'+shapeType.getImagePath()+'" alt="'+shapeType.getName()+'" />';
+			button.innerHTML = '<img class="track" src="'+shapeType.getDefaultVariant().getImage()+'" alt="'+shapeType.getName()+'" />';
 			
-			button.addEventListener('click', function(event) {
-				var shape: Shape;
-				if(this.layout.getCurrentElement() instanceof Shape) {
-					var shape: Shape = Shape.createFromShape(shapeType, this.layout.getCurrentElement());
-				} else if(this.layout.getCurrentElement() instanceof Point) {
-					var shape: Shape = Shape.createShape(shapeType, this.layout.getCurrentElement());
-				}
-				if(shape != null) {
-					this.layout.addShape(shape);
-					this.draw();
+			button.addEventListener('click', function(event) {	
+				var selectedVariantIndex: number = this.elements['variantTypes'].selectedIndex;
+				var variantType: VariantType = this.variantTypes[this.elements['variantTypes'].options[selectedVariantIndex].value];		
+				var variant: Variant = shapeType.getVariantByType(variantType);
+
+				if(variant != null) {
+					
+					var shape: Shape;
+					if(this.layout.getCurrentElement() instanceof Shape) {
+						var shape: Shape = Shape.createFromShape(shapeType, variant, this.layout.getCurrentElement());
+					} else if(this.layout.getCurrentElement() instanceof Point) {
+						var shape: Shape = Shape.createShape(shapeType, variant, this.layout.getCurrentElement());
+					}
+					if(shape != null) {
+						this.layout.addShape(shape);
+						this.draw();
+					}
 				}
 			}.bind(this));
 			
@@ -107,11 +131,11 @@ class DesignerView {
 		for(var si in this.layout.shapes) {
 			var shape: Shape = this.layout.shapes[si];
 			
-			if(shape.getType().getImagePath() != "") {
+			if(shape.getVariant().getImage() != "") {
 				var img: HTMLImageElement = new Image;
-				img.src = shape.getType().getImagePath();
+				img.src = shape.getVariant().getImage();
 				
-				this.drawRotatedImage(img, shape.getPosition(), shape.getType().getWidth(), shape.getType().getHeight());
+				this.drawRotatedImage(img, shape.getPosition(), shape.getVariant().getWidth(), shape.getVariant().getHeight());
 			}
 			
 			if(shape === this.layout.getCurrentElement()) {				

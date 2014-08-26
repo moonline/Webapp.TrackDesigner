@@ -2,13 +2,14 @@ import Point = require("Classes/Domain/Model/Point");
 import ConnectionPoint = require("Classes/Domain/Model/ConnectionPoint");
 import Vector = require("Classes/Domain/Model/Vector");
 import ShapeType = require("Classes/Domain/Model/ShapeType");
+import Variant = require("Classes/Domain/Model/Variant");
 
 class Shape {
-	public static createFromConnectionPoint(type: ShapeType, connectionPoint: ConnectionPoint): Shape {
+	public static createFromConnectionPoint(type: ShapeType, variant: Variant, connectionPoint: ConnectionPoint): Shape {
 		var position: Point = connectionPoint.getPosition();
 		position.turnAngle(0.5);
 		var newCenter: Point = type.getDefaultFirstConnectionPoint().getStartPosition(position);
-		var newShape: Shape = new Shape(type, newCenter);
+		var newShape: Shape = new Shape(type, variant, newCenter);
 		for(var i in type.connectionPoints) {
 			newShape.createConnectionPoint(type.connectionPoints[i]);
 		}
@@ -16,17 +17,17 @@ class Shape {
 		return newShape;
 	}
 	
-	public static createFromShape(type: ShapeType, shape: Shape): Shape {
+	public static createFromShape(type: ShapeType, variant: Variant, shape: Shape): Shape {
 		var connectionPoint: ConnectionPoint = shape.getNextFreeConnectionPoint();
 		if(connectionPoint != null) {
-			return Shape.createFromConnectionPoint(type, connectionPoint);
+			return Shape.createFromConnectionPoint(type, variant, connectionPoint);
 		} else {
 			return null;
 		}
 	}
 	
-	public static createShape(type: ShapeType, center: Point) {
-		var newShape: Shape = new Shape(type, center);
+	public static createShape(type: ShapeType, variant: Variant, center: Point) {
+		var newShape: Shape = new Shape(type, variant, center);
 		for(var i in type.connectionPoints) {
 			newShape.createConnectionPoint(type.connectionPoints[i]);
 		}
@@ -37,9 +38,11 @@ class Shape {
 	center: Point;
 	connectionPoints: ConnectionPoint[];
 	type: ShapeType;
+	variant: Variant;
 
-	constructor(type: ShapeType, center: Point, connectionPoints: ConnectionPoint[] = []) {
+	constructor(type: ShapeType, variant: Variant, center: Point, connectionPoints: ConnectionPoint[] = []) {
 		this.type = type;
+		this.variant = variant;
 		this.center = center;
 		this.connectionPoints = connectionPoints;
 	}
@@ -50,6 +53,10 @@ class Shape {
 	
 	public getType(): ShapeType {
 		return this.type;
+	}
+	
+	public getVariant(): Variant {
+		return this.variant;
 	}
 	
 	public getConnectionPoints(): ConnectionPoint[] {

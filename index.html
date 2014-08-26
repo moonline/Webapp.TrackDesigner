@@ -13,25 +13,23 @@
 		
 		<style>
 			img.track { height: 4rem; width: auto; display: inline-block; margin: 0.5rem; }
-			img.smallTrack { height: 1px; width: auto; }
+			img.smallTrack { height: 2em; width: auto; }
 		</style>
 	</head>
 	<body data-ng-view>
 		<header>
+			<select id="variantTypes">
+			
+			</select>
 			<div id="shapeTypes">
 			
-			</div>
+			</div>			
 		</header>
 		<div class="content">
 			<div id="toolbar">
 				<button id="buttonExport">export layout (png)</button>
 				<button id="buttonRemove">delete shape</button>
 				<button id="buttonRotate">rotate shape</button>
-				
-				<img class="smallTrack" src="Resources/Img/Tracks/railStraight.png" />
-				<img class="smallTrack" src="Resources/Img/Tracks/railCurved.png" />
-				<img class="smallTrack" src="Resources/Img/Tracks/switchStraightLeft.png" />
-				<img class="smallTrack" src="Resources/Img/Tracks/switchStraightRight.png" />
 			</div>
 			<!--<form>
 				<input type="Button" name="addShape" value="(+) Shape" id="addShapeButton" />
@@ -43,9 +41,6 @@
 			<canvas id="layoutArea" width="800" height="800"></canvas>
 		</div>
 		<footer>
-			<div id="shapeTypeVariants">
-			
-			</div>
 		</footer>
 		<script src="Resources/Libraries/RequireJS/require.dev.js" data-main="Main.js"></script>
 	</body>

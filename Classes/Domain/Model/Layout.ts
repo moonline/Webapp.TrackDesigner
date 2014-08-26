@@ -16,15 +16,19 @@ class Layout {
 		return this.currentElement;
 	}
 	
+	public setStartPoint(point: Point): void {
+		this.currentElement = point;
+	}
+	
 	public addShape(shape: Shape): void {
 		this.shapes.push(shape);
 		this.currentElement = shape;
 		this.lastInsertedShape = shape;
-		if(shape.getPosition().getX() < shape.getType().getWidth()/2+shape.getType().getHeight()/2) {
-			this.moveShapes(shape.getType().getWidth()+shape.getType().getHeight(), 0);
+		if(shape.getPosition().getX() < shape.getVariant().getWidth()/2+shape.getVariant().getHeight()/2) {
+			this.moveShapes(shape.getVariant().getWidth()+shape.getVariant().getHeight(), 0);
 		}
-		if(shape.getPosition().getY() < shape.getType().getWidth()/2+shape.getType().getHeight()/2) {
-			this.moveShapes(0, shape.getType().getWidth()+shape.getType().getHeight());
+		if(shape.getPosition().getY() < shape.getVariant().getWidth()/2+shape.getVariant().getHeight()/2) {
+			this.moveShapes(0, shape.getVariant().getWidth()+shape.getVariant().getHeight());
 		}
 		this.connectNearConnectionPoint(shape);
 	}
