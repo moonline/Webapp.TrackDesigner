@@ -5,6 +5,7 @@ import Shape = require("Classes/Domain/Model/Shape");
 class Layout {
 	shapes: Shape[];
 	currentElement: any = null;
+	lastInsertedShape: Shape = null;
 	
 	constructor() {
 		this.shapes = [];
@@ -18,6 +19,7 @@ class Layout {
 	public addShape(shape: Shape): void {
 		this.shapes.push(shape);
 		this.currentElement = shape;
+		this.lastInsertedShape = shape;
 		if(shape.getPosition().getX() < shape.getType().getWidth()/2+shape.getType().getHeight()/2) {
 			this.moveShapes(shape.getType().getWidth()+shape.getType().getHeight(), 0);
 		}
@@ -38,6 +40,11 @@ class Layout {
 			if(this.currentElement instanceof Shape) {
 				this.currentElement.rotate();
 				this.connectNearConnectionPoint(this.currentElement);
+				
+				// rotate last inserted element? -> adjust default rotation position
+				if(this.currentElement === this.lastInsertedShape) {
+					this.currentElement.getType().moveDefaultFirstConnectionPointPositionToNext();
+				}
 			}
 		}
 	}

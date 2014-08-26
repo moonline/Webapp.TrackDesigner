@@ -7,12 +7,12 @@ class Shape {
 	public static createFromConnectionPoint(type: ShapeType, connectionPoint: ConnectionPoint): Shape {
 		var position: Point = connectionPoint.getPosition();
 		position.turnAngle(0.5);
-		var newCenter: Point = type.connectionPoints[0].getStartPosition(position);
+		var newCenter: Point = type.getDefaultFirstConnectionPoint().getStartPosition(position);
 		var newShape: Shape = new Shape(type, newCenter);
 		for(var i in type.connectionPoints) {
 			newShape.createConnectionPoint(type.connectionPoints[i]);
 		}
-		newShape.getConnectionPoints()[0].connectTo(connectionPoint);
+		newShape.getConnectionPoints()[newShape.getType().getDefaultFirstConnectionPointPosition()].connectTo(connectionPoint);
 		return newShape;
 	}
 	
