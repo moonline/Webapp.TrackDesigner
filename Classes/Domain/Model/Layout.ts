@@ -52,7 +52,6 @@ class Layout {
 	public removeShape(shape: Shape): void {
 		shape.removeConnectionPoints();
 		var pos: number = this.shapes.indexOf(shape);
-		// TODO
 		this.shapes.splice(pos, 1);
 		shape = null;
 	}
@@ -64,6 +63,7 @@ class Layout {
 				this.removeShape(this.currentElement);
 				if(firstNeighbor != null) {
 					this.currentElement = firstNeighbor;
+					this.lastInsertedShape = firstNeighbor;
 				}
 			}
 		}
