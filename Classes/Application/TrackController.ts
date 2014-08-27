@@ -31,13 +31,27 @@ class TrackController {
 	private createVariantTypes(): { [index: string]: VariantType; } {
 		return {
 			Default: new VariantType('Default'),
-			FoundationLess: new VariantType('Foundation less')
+			FoundationLess: new VariantType('Foundation less'),
+			OutboundLeft: new VariantType('Outbound left'),
+			OutboundRight: new VariantType('Outbound right'),
+			Bridge: new VariantType('Bridge'),
+			Tunnel: new VariantType('Tunnel'),
+			TunnelPortal1: new VariantType('Tunnel portal 1'),
+			TunnelPortal2: new VariantType('Tunnel portal 2')
 		};
 	}
 	
 	private createShapeTypes(): { [index: string]: ShapeType; } {	
 		var defaultVariant = this.variantTypes['Default'];
 		var foundationLessVariant = this.variantTypes['FoundationLess'];
+		var outboundLeftVariant = this.variantTypes['OutboundLeft'];
+		var outboundRightVariant = this.variantTypes['OutboundRight'];
+		var bridgeVariant = this.variantTypes['Bridge'];
+		var tunnelVariant = this.variantTypes['Tunnel'];
+		var tunnelPortal1Variant = this.variantTypes['TunnelPortal1'];
+		var tunnelPortal2Variant = this.variantTypes['TunnelPortal2'];
+		
+		
 	
 		return {
 			railStraight: new ShapeType(
@@ -45,7 +59,13 @@ class TrackController {
 				[new Vector(63.8, 0.0, 0.0), new Vector(63.8, 0.5, 0.5)],
 				[
 					new Variant(defaultVariant, 127.6, 95.7, "Resources/Img/Tracks/railStraight-Default.png"),
-					new Variant(foundationLessVariant, 127.6, 63.8, "Resources/Img/Tracks/railStraight-FoundationLess.png")
+					new Variant(foundationLessVariant, 127.6, 63.8, "Resources/Img/Tracks/railStraight-FoundationLess.png"),
+					new Variant(outboundLeftVariant, 127.6, 95.7, "Resources/Img/Tracks/railStraight-OutboundLeft.png"),
+					new Variant(outboundRightVariant, 127.6, 95.7, "Resources/Img/Tracks/railStraight-OutboundRight.png"),
+					new Variant(bridgeVariant, 127.6, 95.7, "Resources/Img/Tracks/railStraight-Bridge.png"),
+					new Variant(tunnelVariant, 127.6, 2.46806, "Resources/Img/Tracks/railStraight-Tunnel.png"),
+					new Variant(tunnelPortal1Variant, 127.6, 95.7, "Resources/Img/Tracks/railStraight-TunnelPortal1.png"),
+					new Variant(tunnelPortal2Variant, 127.6, 95.7, "Resources/Img/Tracks/railStraight-TunnelPortal2.png")
 				]			
 			),
 			railCurved: new ShapeType(
@@ -53,7 +73,9 @@ class TrackController {
 				[new Vector(62.3424, 0.9906, 0.96875),new Vector(62.3424, 0.5094, 0.53125)],
 				[
 					new Variant(defaultVariant, 143.13777, 100.91007, "Resources/Img/Tracks/railCurved-Default.png"), 
-					new Variant(foundationLessVariant, 136.9144, 69.9295, "Resources/Img/Tracks/railCurved-FoundationLess.png")
+					new Variant(foundationLessVariant, 136.9144, 69.9295, "Resources/Img/Tracks/railCurved-FoundationLess.png"),
+					new Variant(outboundLeftVariant, 143.13777, 100.91007, "Resources/Img/Tracks/railCurved-OutboundLeft.png"),
+					new Variant(outboundRightVariant, 143.13777, 100.91007, "Resources/Img/Tracks/railCurved-OutboundRight.png")
 				]	
 			),
 			switchStraightLeft: new ShapeType(
@@ -68,8 +90,13 @@ class TrackController {
 			),
 			roadStraight: new ShapeType(
 				"Road straight",
-				[new Vector(127.6, 0.0, 0.0),,new Vector(127.6, 0.5, 0.5)],
+				[new Vector(127.6, 0.0, 0.0),new Vector(127.6, 0.5, 0.5)],
 				[new Variant(defaultVariant, 255.2, 255.2, "Resources/Img/Tracks/roadStraight-Default.png")]
+			),
+			railCrossing: new ShapeType(
+				"Crossing",
+				[new Vector(63.8, 0.0, 0.0),new Vector(63.8, 0.25, 0.25),new Vector(63.8, 0.5, 0.5), new Vector(63.8, 0.75, 0.75)],
+				[new Variant(defaultVariant, 127.6, 127.6, "Resources/Img/Tracks/crossingStraight-Default.png")]
 			)
 		};			
 	}
