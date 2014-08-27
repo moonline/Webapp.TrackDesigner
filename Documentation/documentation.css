@@ -1,0 +1,51 @@
+/* general */
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+html, body { margin: 0; font-family: Arial, Helvetica, sans-serif; }
+html { background: gainsboro; }
+body { margin: 2rem; padding: 2rem; box-shadow: 0 0 0.5rem black; background: white; counter-reset: chapter; }
+
+
+/* font */
+h1 { background: teal; padding: 2rem 1rem; margin: -2rem -2rem 2rem -2rem; color: white; }
+
+h2 { border-bottom: 1px solid black; margin-top: 2rem; counter-increment: chapter; counter-reset: subchapter; }
+h2::before { content: counter(chapter) ". "; }
+h3 { counter-increment: subchapter; }
+h3::before { content: counter(chapter) "." counter(subchapter) ". "; }
+
+
+/* images */
+img { max-width: 100%; }
+h1 img { background: white; border-radius: 1rem; width: 1.5rem; padding: 0px; margin-right: 1rem; height: 1.5rem; }
+
+figure { margin: 0.5rem; padding: 0; max-width: 100%; }
+figcaption { font-style: italic; }
+
+
+/* lists */
+dt { font-weight: bold; }
+
+
+/* colors */
+span.green { color: green; }
+span.orange { color: orange; }
+span.icon { font-weight: bold; font-size: 1rem; }
+
+
+/* tables */
+table {  border-collapse: collapse; width: 100%; }
+table td, table, th { padding: 0.5rem; text-align: left; }
+table th { background: gray; color: white; }
+table td { background: gainsboro; }
+
+
+/* links */
+a, a:link, a:active, a:hover, a:visited { color: black; }
+
+
+/* mobile devices (portrait and landscape) */
+@media only screen and (max-device-width : 800px) {
+	body { margin: 0; padding: 0.5rem; }
+	h1 { margin: -0.5rem -0.5rem 1rem -0.5rem; padding: 1rem; }
+}
