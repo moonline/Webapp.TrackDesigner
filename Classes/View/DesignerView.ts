@@ -125,6 +125,7 @@ class DesignerView implements Observer {
 	
 	public draw(): void {
 		this.canvas.clearRect(0, 0, (<HTMLCanvasElement>this.elements['canvas']).width, (<HTMLCanvasElement>this.elements['canvas']).height);
+		this.drawBackground();
 		
 		if(this.layout.getCurrentElement() instanceof Point) {
 			this.drawPoint(this.layout.getCurrentElement(), this.viewConfig.freePointSize, "rgb(255,140,0)", "rgb(255,140,0)");
@@ -188,6 +189,16 @@ class DesignerView implements Observer {
 	
 		// and restore the co-ords to how they were when we began
 		this.canvas.restore(); 
+	}
+	
+	private drawBackground(): void {
+		this.canvas.beginPath();
+		this.canvas.rect(0, 0, (<HTMLCanvasElement>this.elements['canvas']).width, (<HTMLCanvasElement>this.elements['canvas']).height);
+		this.canvas.fillStyle = 'white';
+		this.canvas.fill();
+		/*this.canvas.lineWidth = 0;
+		this.canvas.strokeStyle = 'white';
+		this.canvas.stroke();*/
 	}
 	
 	private exportLayout(): void {
