@@ -15,34 +15,48 @@
 			* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
 			body { font-family: Ubuntu, Arial, Helvetica, sans-serif; background: gainsboro; }
 			
-			img.track { height: 4rem; width: auto; display: inline-block; margin: 0.5rem; }
-			img.smallTrack { height: 2em; width: auto; }
 			#layoutArea { background: white; }
-			#drawingMapper { width: 100%; overflow: scroll; padding: 0.5em; }
+			#drawingMapper { width: 100%; overflow: scroll; background: white; }
+			
+			#shapeTypes button { width: 5rem; height: 3rem; padding: 0; margin: 0.25rem; display: inline-block; }
+			#shapeTypes img.track { width: auto; height: auto; max-width: 100%; max-height: 100%; display: inline-block; }
+			
+			header { background: linear-gradient(#CC6623, #BB492D); width: 100%; padding: 0.25rem; }
+			.subheader { background: #A6A6A6; padding: 0.25rem; }
+			
+			.button, button, select { display: inline-block; padding: 0.25rem; height: 2rem; 
+				background: none; border: none; color: white; 
+				-webkit-appearance: none; -moz-appearance: none; appearance: none;
+			}
+			.button:hover, button:hover, select:hover, .button:active, button:active, select:active { opacity: 0.75; }
+			.button img.icon, button img.icon { max-width: 100%; max-height: 100%; width: auto; height: auto; display: inline-block; }
+			.button span.label, button span.label { display: none; }
 		</style>
 	</head>
 	<body data-ng-view>
 		<header>
-			<select id="variantTypes">
-			
-			</select>
-			<div id="shapeTypes">
-			
-			</div>			
-		</header>
-		<div class="content">
 			<div id="toolbar">
-				<button id="buttonExport">export layout (png)</button>
-				<button id="buttonRemove">delete shape</button>
-				<button id="buttonRotate">rotate shape</button>
-			</div>
-			<!--<form>
-				<input type="Button" name="addShape" value="(+) Shape" id="addShapeButton" />
-				<input type="button" name="Straight" value="Straight" onclick="setRail('straight');">
-				<input type="button" name="Curve Left" value="Curve Left" onclick="setRail('curveLeft');">
-				<input type="button" name="Curve Right" value="Curve Right" onclick="setRail('curveRight');">
-				<input type="button" name="Draw" value="Draw" onclick="draw();">
-			</form>-->
+				<select id="variantTypes">
+				
+				</select>
+				<button id="buttonExport" title="export layout (png)">
+					<img class="icon" src="Resources/Img/icon-export.png" />
+					<span class="label">export layout (png)</span>
+				</button>
+				<button id="buttonRemove" title="delete shape">
+					<img class="icon" src="Resources/Img/icon-delete.png" />
+					<span class="label"delete shape</span>
+				</button>
+				<button id="buttonRotate" title="rotate shape">
+					<img class="icon" src="Resources/Img/icon-rotate.png" />
+					<span class="label">rotate shape</span>
+				</button>
+			</div>		
+		</header>
+		<div class="subheader">			
+			<div id="shapeTypes"></div>	
+		</div>
+		<div class="content">
 			<div id="drawingMapper">
 				<canvas id="layoutArea" width="500" height="500"></canvas>
 			</div>
