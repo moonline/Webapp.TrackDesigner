@@ -2,12 +2,17 @@ import Point = require("Classes/Domain/Model/Point");
 import ConnectionPoint = require("Classes/Domain/Model/ConnectionPoint");
 import Shape = require("Classes/Domain/Model/Shape");
 
-class Layout {
+import Observable = require("Classes/Utility/Observable");
+import Observer = require("Classes/Utility/Observer");
+import EventType = require("Classes/Utility/EventType");
+
+class Layout extends Observable implements Observer {
 	shapes: Shape[];
 	currentElement: any = null;
 	lastInsertedShape: Shape = null;
 	
 	constructor() {
+		super();
 		this.shapes = [];
 		this.currentElement = this;
 	}
@@ -16,13 +21,17 @@ class Layout {
 		return this.currentElement;
 	}
 	
+	private setCurrentElement(element: any) {
+		this.currentElement = element;		
+		this.notifyObservers(EventType.propertyChanged, this.currentElement);
+	}
+	
 	public setStartPoint(point: Point): void {
-		this.currentElement = point;
+		this.setCurrentElement(point);
 	}
 	
 	public addShape(shape: Shape): void {
 		this.shapes.push(shape);
-		this.currentElement = shape;
 		this.lastInsertedShape = shape;
 		if(shape.getPosition().getX() < shape.getVariant().getWidth()/2+shape.getVariant().getHeight()/2) {
 			this.moveShapes(shape.getVariant().getWidth()+shape.getVariant().getHeight(), 0);
@@ -31,6 +40,8 @@ class Layout {
 			this.moveShapes(0, shape.getVariant().getWidth()+shape.getVariant().getHeight());
 		}
 		this.connectNearConnectionPoint(shape);
+		shape.addObserver(this);
+		this.setCurrentElement(shape);
 	}
 	
 	private moveShapes(deltaX: number, deltaY: number) {
@@ -54,10 +65,12 @@ class Layout {
 	}
 	
 	public removeShape(shape: Shape): void {
+		shape.removeObserver(this);
 		shape.removeConnectionPoints();
 		var pos: number = this.shapes.indexOf(shape);
 		this.shapes.splice(pos, 1);
 		shape = null;
+		this.notifyObservers(EventType.childRemoved, null);
 	}
 	
 	public removeCurrentShape(): void {
@@ -66,7 +79,7 @@ class Layout {
 				var firstNeighbor: Shape = this.currentElement.getFirstNeighbor();
 				this.removeShape(this.currentElement);
 				if(firstNeighbor != null) {
-					this.currentElement = firstNeighbor;
+					this.setCurrentElement(firstNeighbor);
 					this.lastInsertedShape = firstNeighbor;
 				}
 			}
@@ -76,11 +89,11 @@ class Layout {
 	public setCurrentElementByPosition(position: Point, config: any): void {
 		for(var spi in this.shapes) {
 			if(position.isInCircle(this.shapes[spi].getPosition(), config['shapePointSize'])) {
-				this.currentElement = this.shapes[spi];
+				this.setCurrentElement(this.shapes[spi]);
 				return;
 			}
 		}
-		this.currentElement = position;
+		this.setCurrentElement(position);
 	}
 	
 	private connectNearConnectionPoint(shape: Shape): ConnectionPoint {
@@ -100,6 +113,10 @@ class Layout {
 				}
 			}
 		}
+	}
+	
+	public notify(event: EventType, notifier: Observable, subject: any) {
+		this.notifyObservers(event, subject);
 	}
 }
 

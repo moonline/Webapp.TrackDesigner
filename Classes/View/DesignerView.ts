@@ -7,7 +7,11 @@ import Layout = require("Classes/Domain/Model/Layout");
 import VariantType = require("Classes/Domain/Model/VariantType");
 import Variant = require("Classes/Domain/Model/Variant");
 
-class DesignerView {
+import Observer = require("Classes/Utility/Observer");
+import Observable = require("Classes/Utility/Observable");
+import EventType = require("Classes/Utility/EventType");
+
+class DesignerView implements Observer {
 	viewConfig: any;
 	factor: number;
 	elements: { [index: string]: HTMLElement; } = {};	
@@ -25,6 +29,7 @@ class DesignerView {
 		}
 	
 		this.layout = layout;
+		this.layout.addObserver(this);
 		this.shapeTypes = shapeTypes;
 		this.variantTypes = variantTypes
 		this.factor = 0.5;
@@ -40,7 +45,7 @@ class DesignerView {
 			var y: number = event.pageY - canvasElement.offsetTop;
 
 			this.layout.setCurrentElementByPosition(new Point(x/this.factor,y/this.factor),this.viewConfig);
-			this.draw();
+			//this.draw();
 		}.bind(this));
 		
 		this.canvas = (<HTMLCanvasElement>this.elements['canvas']).getContext('2d');
@@ -79,7 +84,7 @@ class DesignerView {
 					}
 					if(shape != null) {
 						this.layout.addShape(shape);
-						this.draw();
+						//this.draw();
 					}
 				}
 			}.bind(this));
@@ -90,26 +95,26 @@ class DesignerView {
 		this.elements['buttonRemove'] = <HTMLElement>document.getElementById('buttonRemove');
 		this.elements['buttonRemove'].addEventListener('click', function(event) {
 			this.layout.removeCurrentShape();
-			this.draw();
+			//this.draw();
 		}.bind(this));		
 		
 		document.body.addEventListener('keydown', function(event) {
 			if (event.keyCode === event.DOM_VK_BACK_SPACE || event.keyCode === 8 || event.keyCode === event.DOM_VK_DELETE || event.keyCode === 46) {
 				this.layout.removeCurrentShape();
-				this.draw();
+				//this.draw();
 			}
 		}.bind(this));
 		
 		this.elements['buttonRotate'] = <HTMLElement>document.getElementById('buttonRotate');
 		this.elements['buttonRotate'].addEventListener('click', function(event) {
 			this.layout.rotateCurrentShape();
-			this.draw();
+			//this.draw();
 		}.bind(this));
 		
 		document.body.addEventListener('keypress', function(event) {
 			if (String.fromCharCode(event.charCode) === 'r') {
 				this.layout.rotateCurrentShape();
-				this.draw();
+				//this.draw();
 			}
 		}.bind(this));
 		
@@ -193,6 +198,11 @@ class DesignerView {
 			(<HTMLCanvasElement>this.elements['canvas']).toDataURL("image/png"),
 			'_blank'
 		);
+	}
+	
+	public notify(event: EventType, notifier: Observable, subject: any) {
+		this.draw();
+		console.log('notify');
 	}
 }
 

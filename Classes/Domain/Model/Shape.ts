@@ -4,7 +4,10 @@ import Vector = require("Classes/Domain/Model/Vector");
 import ShapeType = require("Classes/Domain/Model/ShapeType");
 import Variant = require("Classes/Domain/Model/Variant");
 
-class Shape {
+import Observable = require("Classes/Utility/Observable");
+import EventType = require("Classes/Utility/EventType");
+
+class Shape extends Observable {
 	public static createFromConnectionPoint(type: ShapeType, variant: Variant, connectionPoint: ConnectionPoint): Shape {
 		var position: Point = connectionPoint.getPosition();
 		position.turnAngle(0.5);
@@ -41,6 +44,7 @@ class Shape {
 	variant: Variant;
 
 	constructor(type: ShapeType, variant: Variant, center: Point, connectionPoints: ConnectionPoint[] = []) {
+		super();
 		this.type = type;
 		this.variant = variant;
 		this.center = center;
@@ -66,6 +70,7 @@ class Shape {
 	
 	public move(deltaX: number, deltaY: number): void {
 		this.center.move(deltaX, deltaY);
+		this.notifyObservers(EventType.propertyChanged, this);
 	}
 	
 	public addConnectionPoint(point: ConnectionPoint): void {
@@ -114,10 +119,6 @@ class Shape {
 		return null;
 	}
 	
-	/*public remove(): void {
-	
-	}*/
-	
 	/**
 	 * unbind old connectionPoint and bind new point
 	 */
@@ -136,6 +137,7 @@ class Shape {
 			this.center = newConnectionPoint.getIncrementalPosition().getStartPosition(position);
 			newConnectionPoint.connectTo(connectedNeighbor);
 		}
+		this.notifyObservers(EventType.propertyChanged, this);
 	}
 	
 	/**
