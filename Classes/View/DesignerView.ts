@@ -46,6 +46,9 @@ class DesignerView implements Observer {
 
 			this.layout.setCurrentElementByPosition(new Point(x/this.factor,y/this.factor),this.viewConfig);
 		}.bind(this));
+		(<HTMLCanvasElement>this.elements['canvas']).width = this.layout.getWidth()*this.factor;
+		(<HTMLCanvasElement>this.elements['canvas']).height = this.layout.getHeight()*this.factor;
+		
 		
 		this.canvas = (<HTMLCanvasElement>this.elements['canvas']).getContext('2d');
 		
@@ -195,8 +198,12 @@ class DesignerView implements Observer {
 	}
 	
 	public notify(event: EventType, notifier: Observable, subject: any) {
+		if(event === EventType.objectResized && subject instanceof Layout) {
+			(<HTMLCanvasElement>this.elements['canvas']).width = this.layout.getWidth()*this.factor;
+			(<HTMLCanvasElement>this.elements['canvas']).height = this.layout.getHeight()*this.factor;
+		}
+	
 		this.draw();
-		console.log('notify');
 	}
 }
 

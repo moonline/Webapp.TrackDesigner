@@ -7,14 +7,26 @@ import Observer = require("Classes/Utility/Observer");
 import EventType = require("Classes/Utility/EventType");
 
 class Layout extends Observable implements Observer {
+	width: number;
+	height: number;
 	shapes: Shape[];
 	currentElement: any = null;
 	lastInsertedShape: Shape = null;
 	
-	constructor() {
+	constructor(width: number = 1000, height: number = 1000) {
 		super();
+		this.width = width;
+		this.height = height;
 		this.shapes = [];
 		this.currentElement = this;
+	}
+	
+	public getWidth(): number {
+		return this.width;
+	}
+	
+	public getHeight(): number {
+		return this.height;
 	}
 	
 	public getCurrentElement(): any {
@@ -33,21 +45,39 @@ class Layout extends Observable implements Observer {
 	public addShape(shape: Shape): void {
 		this.shapes.push(shape);
 		this.lastInsertedShape = shape;
-		if(shape.getPosition().getX() < shape.getVariant().getWidth()/2+shape.getVariant().getHeight()/2) {
-			this.moveShapes(shape.getVariant().getWidth()+shape.getVariant().getHeight(), 0);
-		}
-		if(shape.getPosition().getY() < shape.getVariant().getWidth()/2+shape.getVariant().getHeight()/2) {
-			this.moveShapes(0, shape.getVariant().getWidth()+shape.getVariant().getHeight());
-		}
+		this.adjustLayoutIfShapeOutside(shape);
 		this.connectNearConnectionPoint(shape);
 		shape.addObserver(this);
 		this.setCurrentElement(shape);
 	}
 	
-	private moveShapes(deltaX: number, deltaY: number) {
+	private adjustLayoutIfShapeOutside(shape: Shape): void {
+		var minCoordinates: { x: number; y: number; } = Point.getMinCoordinates(shape.getCorners());
+		var deltaX: number = (minCoordinates.x < 0) ? 0-minCoordinates.x+10 : 0;
+		var deltaY: number = (minCoordinates.y < 0) ? 0-minCoordinates.y+10 : 0;
+		if(deltaX > 0 || deltaY > 0) {
+			this.moveShapes(deltaX, deltaY);
+		}
+		
+		var maxCoordinates: { x: number; y: number; } = Point.getMaxCoordinates(shape.getCorners());
+		var deltaX: number = (maxCoordinates.x > this.width) ? maxCoordinates.x-this.width+10 : 0;
+		var deltaY: number = (maxCoordinates.y > this.height) ? maxCoordinates.y-this.height+10 : 0;
+		if(deltaX > 0 || deltaY > 0) {
+			this.width += deltaX;
+			this.height += deltaY;
+			this.notifyObservers(EventType.objectResized, this);
+		}
+	}
+	
+	private moveShapes(deltaX: number, deltaY: number):void {
+		this.width += deltaX;
+		this.height += deltaY;
+		this.notifyObservers(EventType.objectResized, this);
+		
 		for(var spi in this.shapes) {
 			this.shapes[spi].move(deltaX, deltaY);
 		}
+		this.notifyObservers(EventType.objectMoved, this);
 	}
 	
 	public rotateCurrentShape(): void {
@@ -55,6 +85,7 @@ class Layout extends Observable implements Observer {
 			if(this.currentElement instanceof Shape) {
 				this.currentElement.rotate();
 				this.connectNearConnectionPoint(this.currentElement);
+				this.adjustLayoutIfShapeOutside(this.currentElement);
 				
 				// rotate last inserted element? -> adjust default rotation position
 				if(this.currentElement === this.lastInsertedShape) {
@@ -116,7 +147,10 @@ class Layout extends Observable implements Observer {
 	}
 	
 	public notify(event: EventType, notifier: Observable, subject: any) {
-		this.notifyObservers(event, subject);
+		if(event === EventType.objectMoved && subject instanceof Shape) {		
+		} else {
+			this.notifyObservers(event, subject);
+		}
 	}
 }
 

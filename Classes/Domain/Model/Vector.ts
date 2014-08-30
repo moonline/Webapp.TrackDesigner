@@ -20,6 +20,14 @@ class Vector {
 		this.pointOrientation = pointOrientation;
 	}
 	
+	public getLength(): number {
+		return this.length;
+	}
+	
+	public getAngle(): number {
+		return this.angle;
+	}
+	
 	public getEndPosition(startPosition: Point): Point {
 		return new Point(
 			startPosition.getX()+this.getDeltaX(startPosition.getAngle()), 

@@ -1,4 +1,33 @@
 class Point {
+	public static getMinCoordinates(points: Point[]): { x: number; y: number; } {
+		if(points.length > 0) {
+			var x: number = points[0].getX();
+			var y: number = points[0].getY();
+			for(var pi in points) {
+				if(points[pi].getX() < x) { x = points[pi].getX(); }
+				if(points[pi].getY() < y) { y = points[pi].getY(); }
+			}
+			return { x: x, y: y };
+		} else {
+			return { x: 0, y: 0 };
+		}
+	}
+	
+	public static getMaxCoordinates(points: Point[]): { x: number; y: number; } {
+		if(points.length > 0) {
+			var x: number = points[0].getX();
+			var y: number = points[0].getY();
+			for(var pi in points) {
+				if(points[pi].getX() > x) { x = points[pi].getX(); }
+				if(points[pi].getY() > y) { y = points[pi].getY(); }
+			}
+			return { x: x, y: y };
+		} else {
+			return { x: 0, y: 0 };
+		}
+	}
+
+
 	x: number;
 	y: number;
 	angle: number; // turn, 1=360°
@@ -8,6 +37,7 @@ class Point {
 		this.y = y;
 		this.angle = angle;
 	}
+
 	
 	public getX(): number {
 		return this.x;

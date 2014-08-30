@@ -1,7 +1,9 @@
 enum EventType {
 	propertyChanged,
 	childAdded,
-	childRemoved
+	childRemoved,
+	objectResized,
+	objectMoved
 }
 
 export = EventType;

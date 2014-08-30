@@ -12,8 +12,13 @@
 
 		
 		<style>
+			* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+			body { font-family: Ubuntu, Arial, Helvetica, sans-serif; background: gainsboro; }
+			
 			img.track { height: 4rem; width: auto; display: inline-block; margin: 0.5rem; }
 			img.smallTrack { height: 2em; width: auto; }
+			#layoutArea { background: white; }
+			#drawingMapper { width: 100%; overflow: scroll; padding: 0.5em; }
 		</style>
 	</head>
 	<body data-ng-view>
@@ -38,7 +43,9 @@
 				<input type="button" name="Curve Right" value="Curve Right" onclick="setRail('curveRight');">
 				<input type="button" name="Draw" value="Draw" onclick="draw();">
 			</form>-->
-			<canvas id="layoutArea" width="800" height="800"></canvas>
+			<div id="drawingMapper">
+				<canvas id="layoutArea" width="500" height="500"></canvas>
+			</div>
 		</div>
 		<footer>
 		</footer>

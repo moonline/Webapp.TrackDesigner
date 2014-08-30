@@ -67,10 +67,21 @@ class Shape extends Observable {
 		return this.connectionPoints;
 	}
 	
+	public getCorners(): Point[] {
+		var cornerVector: Vector = Vector.createVectorFromPoints(new Point(0,0), new Point(this.variant.getWidth()/2, this.variant.getHeight()/2));
+		return [
+			cornerVector.getEndPosition(this.center),
+			(new Vector(cornerVector.getLength(), 0.5-cornerVector.getAngle())).getEndPosition(this.center),
+			(new Vector(cornerVector.getLength(), 0.5+cornerVector.getAngle())).getEndPosition(this.center),
+			(new Vector(cornerVector.getLength(), 1-cornerVector.getAngle())).getEndPosition(this.center)	
+		];
+	}
+	
+	
 	
 	public move(deltaX: number, deltaY: number): void {
 		this.center.move(deltaX, deltaY);
-		this.notifyObservers(EventType.propertyChanged, this);
+		this.notifyObservers(EventType.objectMoved, this);
 	}
 	
 	public addConnectionPoint(point: ConnectionPoint): void {
