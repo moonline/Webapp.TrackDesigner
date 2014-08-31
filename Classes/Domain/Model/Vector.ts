@@ -28,6 +28,10 @@ class Vector {
 		return this.angle;
 	}
 	
+	public getPointOrientation(): number {
+		return this.pointOrientation;
+	}
+	
 	public getEndPosition(startPosition: Point): Point {
 		return new Point(
 			startPosition.getX()+this.getDeltaX(startPosition.getAngle()), 

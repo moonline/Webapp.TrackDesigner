@@ -147,6 +147,26 @@ class Shape extends Observable {
 			position.turnAngle(0.5);
 			this.center = newConnectionPoint.getIncrementalPosition().getStartPosition(position);
 			newConnectionPoint.connectTo(connectedNeighbor);
+			
+		// rotate shape connected with 2points only if angles are the same direction
+		} else if(connectedPoints.length == 2) {
+			if(connectedPoints[0].getIncrementalPosition().getPointOrientation()+0.5 == connectedPoints[1].getIncrementalPosition().getPointOrientation()) {
+				var connectionPoint1: ConnectionPoint = connectedPoints[0];
+				var connectionPoint2: ConnectionPoint = connectedPoints[1];
+				
+				// unbind old point
+				var connectedNeighbor1: ConnectionPoint = connectionPoint1.getConnection();
+				var connectedNeighbor2: ConnectionPoint = connectionPoint2.getConnection();
+				connectedNeighbor1.removeConnection();
+				connectedNeighbor2.removeConnection();
+				
+				// recalc new center, set new connection
+				var position: Point = connectedNeighbor2.getPosition();
+				position.turnAngle(0.5);
+				this.center = connectionPoint1.getIncrementalPosition().getStartPosition(position);
+				connectionPoint1.connectTo(connectedNeighbor2);
+				connectionPoint2.connectTo(connectedNeighbor1);
+			}
 		}
 		this.notifyObservers(EventType.propertyChanged, this);
 	}
