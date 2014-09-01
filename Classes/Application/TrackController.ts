@@ -37,7 +37,9 @@ class TrackController {
 			Bridge: new VariantType('Bridge'),
 			Tunnel: new VariantType('Tunnel'),
 			TunnelPortal1: new VariantType('Tunnel portal 1'),
-			TunnelPortal2: new VariantType('Tunnel portal 2')
+			TunnelPortal2: new VariantType('Tunnel portal 2'),
+			Grass: new VariantType('Grass'),
+			Water: new VariantType('Water')
 		};
 	}
 	
@@ -50,6 +52,8 @@ class TrackController {
 		var tunnelVariant = this.variantTypes['Tunnel'];
 		var tunnelPortal1Variant = this.variantTypes['TunnelPortal1'];
 		var tunnelPortal2Variant = this.variantTypes['TunnelPortal2'];
+		var grassVariant = this.variantTypes['Grass'];
+		var waterVariant = this.variantTypes['Water'];
 		
 		
 	
@@ -88,15 +92,55 @@ class TrackController {
 				[new Vector(131.52707, 0.03899, 0.0),new Vector(131.52707, 0.46101, 0.5),new Vector(131.52707, 0.53899, 0.5)],
 				[new Variant(defaultVariant, 255.2, 159.5, "Resources/Img/Tracks/switchStraightRight-Default.png")]
 			),
+			railRoadCrossing: new ShapeType(
+				"Railroal crossing",
+				[new Vector(127.6, 0.0, 0.0),new Vector(127.6, 0.25, 0.25), new Vector(127.6, 0.5, 0.5),new Vector(127.6, 0.75, 0.75)],
+				[new Variant(grassVariant, 255.2, 255.2, "Resources/Img/Tracks/railRoadCrossing-Grass.png")]
+			),
 			roadStraight: new ShapeType(
 				"Road straight",
 				[new Vector(127.6, 0.0, 0.0),new Vector(127.6, 0.5, 0.5)],
-				[new Variant(defaultVariant, 255.2, 255.2, "Resources/Img/Tracks/roadStraight-Default.png")]
+				[new Variant(defaultVariant, 255.2, 255.2, "Resources/Img/Tracks/roadStraight-Default.png"),new Variant(grassVariant, 255.2, 255.2, "Resources/Img/Tracks/roadStraight-Grass.png")]
+			),
+			roadCurved: new ShapeType(
+				"Road curved",
+				[new Vector(127.6, 0.25, 0.25),new Vector(127.6, 0.5, 0.5)],
+				[new Variant(defaultVariant, 255.2, 255.2, "Resources/Img/Tracks/roadCurved-Default.png"),new Variant(grassVariant, 255.2, 255.2, "Resources/Img/Tracks/roadCurved-Grass.png")]
+			),
+			roadTCrossing: new ShapeType(
+				"Road T-Crossing",
+				[new Vector(127.6, 0.0, 0.0),new Vector(127.6, 0.25, 0.25),new Vector(127.6, 0.5, 0.5)],
+				[new Variant(defaultVariant, 255.2, 255.2, "Resources/Img/Tracks/roadTCrossing-Default.png"),new Variant(grassVariant, 255.2, 255.2, "Resources/Img/Tracks/roadTCrossing-Grass.png")]
 			),
 			railCrossing: new ShapeType(
 				"Crossing",
 				[new Vector(63.8, 0.0, 0.0),new Vector(63.8, 0.25, 0.25),new Vector(63.8, 0.5, 0.5), new Vector(63.8, 0.75, 0.75)],
 				[new Variant(defaultVariant, 127.6, 127.6, "Resources/Img/Tracks/crossingStraight-Default.png")]
+			),
+			areaSquare: new ShapeType(
+				"Area Square",
+				[new Vector(127.6, 0.0, 0.0),new Vector(127.6, 0.25, 0.25), new Vector(127.6, 0.5, 0.5),new Vector(127.6, 0.75, 0.75)],
+				[new Variant(grassVariant, 255.2, 255.2, "Resources/Img/Tracks/areaSquare-Grass.png"),new Variant(waterVariant, 255.2, 255.2, "Resources/Img/Tracks/areaSquare-Water.png")]
+			),
+			areaRectangle: new ShapeType(
+				"Area Rectangle",
+				[new Vector(127.6, 0.0, 0.0),new Vector(86.3, 0.25, 0.25), new Vector(127.6, 0.5, 0.5),new Vector(86.3, 0.75, 0.75)],
+				[new Variant(grassVariant, 255.2, 127.6, "Resources/Img/Tracks/areaRectangle-Grass.png"),new Variant(waterVariant, 255.2, 127.6, "Resources/Img/Tracks/areaRectangle-Water.png")]
+			),
+			riverStraight: new ShapeType(
+				"River straight",
+				[new Vector(127.6, 0.0, 0.0),new Vector(127.6, 0.5, 0.5)],
+				[new Variant(defaultVariant, 255.2, 255.2, "Resources/Img/Tracks/riverStraight-Default.png")]
+			),
+			riverCurved: new ShapeType(
+				"River curved",
+				[new Vector(127.6, 0.5, 0.5),new Vector(127.6, 0.75, 0.75)],
+				[new Variant(defaultVariant, 255.2, 255.2, "Resources/Img/Tracks/riverCurved-Default.png")]
+			),
+			riverOutfall: new ShapeType(
+				"River outfall",
+				[new Vector(127.6, 0.0, 0.0),new Vector(127.6, 0.5, 0.5),new Vector(127.6, 0.75, 0.75)],
+				[new Variant(defaultVariant, 255.2, 255.2, "Resources/Img/Tracks/riverOutfall-Default.png")]
 			)
 		};			
 	}
