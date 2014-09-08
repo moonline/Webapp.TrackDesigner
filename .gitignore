@@ -4,3 +4,8 @@
 /Classes/**/*.js
 /*.js
 *.bak
+*.kate-swp
+
+// eclipse trash
+.project
+/.settings/*

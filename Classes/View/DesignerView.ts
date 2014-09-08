@@ -138,10 +138,6 @@ class DesignerView implements Observer {
 		this.canvas.clearRect(0, 0, (<HTMLCanvasElement>this.elements['canvas']).width, (<HTMLCanvasElement>this.elements['canvas']).height);
 		this.drawBackground();
 		
-		if(this.layout.getCurrentElement() instanceof Point) {
-			this.drawPoint(this.layout.getCurrentElement(), this.viewConfig.freePointSize, "rgb(255,140,0)", "rgb(255,140,0)");
-		}
-		
 		for(var si in this.layout.shapes) {
 			var shape: Shape = this.layout.shapes[si];
 			
@@ -153,8 +149,8 @@ class DesignerView implements Observer {
 			}
 			
 			if(shape === this.layout.getCurrentElement()) {				
-				this.canvas.globalAlpha = 0.5;
-				this.drawPoint(shape.getPosition(), this.viewConfig.shapePointSize, "rgb(255,255,0)", "rgb(255,255,0)");
+				this.canvas.globalAlpha = 0.4;
+				this.drawRectangle(shape.getCorners(), "rgb(255,255,0)", "rgb(255,255,0)");
 				this.canvas.globalAlpha = 1;
 			}
 					
@@ -167,6 +163,10 @@ class DesignerView implements Observer {
 					this.drawPoint(connectionPoints[cpi].getPosition(), this.viewConfig.connectedPointSize, "rgb(255,255,255)", "rgb(255,255,255)");
 				}
 			}
+		}		
+		
+		if(this.layout.getCurrentElement() instanceof Point) {
+			this.drawPoint(this.layout.getCurrentElement(), this.viewConfig.freePointSize, "rgb(255,140,0)", "rgb(255,140,0)");
 		}
 	}
 	
@@ -200,6 +200,27 @@ class DesignerView implements Observer {
 	
 		// and restore the co-ords to how they were when we began
 		this.canvas.restore(); 
+	}
+	
+	private drawRectangle(points: Point[], fillStyle: string = null, strokeStyle: string = null, lineWidth: number = 1): void {
+		if(points.length > 2) {
+			this.canvas.beginPath();
+			this.canvas.moveTo(points[0].getX()*this.factor, points[0].getY()*this.factor);
+			for(var pi = 1; pi < points.length; pi++) {
+				this.canvas.lineTo(points[pi].getX()*this.factor, points[pi].getY()*this.factor);
+			}
+			this.canvas.lineTo(points[0].getX()*this.factor, points[0].getY()*this.factor);
+			
+			if(fillStyle) {
+				this.canvas.fillStyle = fillStyle;
+				this.canvas.fill();
+			}
+			if(strokeStyle) {
+				this.canvas.lineWidth = lineWidth;
+				this.canvas.strokeStyle = strokeStyle;
+				this.canvas.stroke();
+			}
+		}
 	}
 	
 	private drawBackground(): void {
