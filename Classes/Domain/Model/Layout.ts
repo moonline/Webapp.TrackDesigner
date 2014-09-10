@@ -119,9 +119,12 @@ class Layout extends Observable implements Observer {
 	
 	public setCurrentElementByPosition(position: Point, config: any): void {
 		for(var spi in this.shapes) {
-			if(position.isInCircle(this.shapes[spi].getPosition(), config['shapePointSize'])) {
-				this.setCurrentElement(this.shapes[spi]);
-				return;
+			if(position.isInSquare(this.shapes[spi].getPosition(), this.shapes[spi].getVariant().getWidth()+this.shapes[spi].getVariant().getHeight())) {
+				console.log(this.shapes[spi].getVariant());
+				if(position.isInRectangle(this.shapes[spi].getPosition(), this.shapes[spi].getVariant().getWidth(), this.shapes[spi].getVariant().getHeight())) {
+					this.setCurrentElement(this.shapes[spi]);
+					return;
+				}
 			}
 		}
 		this.setCurrentElement(position);

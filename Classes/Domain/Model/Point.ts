@@ -1,3 +1,5 @@
+import Vector = require("Classes/Domain/Model/Vector");
+
 class Point {
 	public static getMinCoordinates(points: Point[]): { x: number; y: number; } {
 		if(points.length > 0) {
@@ -57,6 +59,33 @@ class Point {
 	
 	public isInCircle(position: Point, radius: number):boolean {
 		return (Math.abs(this.y - position.getY()) < radius && Math.abs(this.x - position.getX()) < radius);
+	}
+	
+	public isInSquare(position: Point, length: number):boolean {
+		return (Math.abs(this.y - position.getY()) < length/2 && Math.abs(this.x - position.getX()) < length/2);
+	}
+	
+	/**
+	 * check if point is inside a rectangle
+	 * 
+	 * @param Point position: The center of the rectangle
+	 * @param number length: The length of the rectangle
+	 * @param number width: The width of the rectangle
+	 * @return boolean	 
+	 */
+	public isInRectangle(position: Point, length: number, width: number):boolean {
+		// don't use vector: circular dependency
+		var x: number = this.getX()-position.getX();
+		var y: number = this.getY()-position.getY();
+		var pointAngle: number = Math.atan(y/x)/(2*Math.PI);
+		
+		var pointDistance: number = x/Math.cos(pointAngle*2*Math.PI);
+		var incrementalAngle: number = pointAngle-position.getAngle();
+		
+		var distanceLengthDirection: number = pointDistance*Math.cos(incrementalAngle*2*Math.PI);
+		var distanceWidthDirection: number = pointDistance*Math.sin(incrementalAngle*2*Math.PI);
+		
+		return (Math.abs(distanceLengthDirection) < length/2 && Math.abs(distanceWidthDirection) < width/2);
 	}
 	
 	public move(deltaX: number, deltyY: number): void {
