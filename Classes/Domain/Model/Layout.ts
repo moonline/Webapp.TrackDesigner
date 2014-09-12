@@ -176,6 +176,20 @@ class Layout extends Observable implements Observer {
 		}
 	}
 	
+	public moveShapeToFront(shape: Shape): void {
+		var shapesToMove: Shape[] = shape.getNeighbors();
+		shapesToMove.push(shape);
+		
+		for(var spi in shapesToMove) {
+			var pos = this.shapes.indexOf(shapesToMove[spi]);
+			if(pos >= 0) {				
+				this.shapes.splice(pos, 1);
+				this.shapes.push(shapesToMove[spi]);
+			}
+		}
+		this.notifyObservers(EventType.objectMoved, this);
+	}
+	
 	public notify(event: EventType, notifier: Observable, subject: any) {
 		if(event === EventType.objectMoved && subject instanceof Shape) {		
 		} else {

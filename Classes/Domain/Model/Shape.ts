@@ -140,6 +140,16 @@ class Shape extends Observable {
 		return null;
 	}
 	
+	public getNeighbors(): Shape[] {
+		var neighbors: Shape[] = [];
+		for(var i in this.connectionPoints) {
+			if(this.connectionPoints[i].connection != null) {
+				neighbors.push(this.connectionPoints[i].getConnection().getShape());
+			}
+		}
+		return neighbors;
+	}
+	
 	/**
 	 * unbind old connectionPoint and bind new point
 	 */

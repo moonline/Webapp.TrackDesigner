@@ -25,7 +25,7 @@ class DesignerView implements Observer {
 			shapePointSize: 50,
 			connectionPointSize: 15,
 			connectedPointSize: 2,
-			freePointSize: 10
+			freePointSize: 15
 		}
 	
 		this.layout = layout;
@@ -121,6 +121,13 @@ class DesignerView implements Observer {
 		this.elements['buttonExport'] = <HTMLElement>document.getElementById('buttonExport');
 		this.elements['buttonExport'].addEventListener('click', function(event) {
 			this.exportLayout();
+		}.bind(this));
+		
+		this.elements['moveToFront'] = <HTMLElement>document.getElementById('moveToFront');
+		this.elements['moveToFront'].addEventListener('click', function(event) {
+			if(this.layout.getCurrentElement() instanceof Shape) {
+				this.layout.moveShapeToFront(this.layout.getCurrentElement());
+			}
 		}.bind(this));
 		
 		this.draw();
