@@ -54,15 +54,7 @@ class DesignerView implements Observer {
 				button.innerHTML = '<img class="track" src="'+variant.getImage()+'" alt="'+shapeType.getName()+'" />';
 				
 				button.addEventListener('click', function(event) {
-					var shape: Shape;
-					if(this.layout.getCurrentElement() instanceof Shape) {
-						var shape: Shape = Shape.createFromShape(shapeType, variant, this.layout.getCurrentElement());
-					} else if(this.layout.getCurrentElement() instanceof Point) {
-						var shape: Shape = Shape.createShape(shapeType, variant, this.layout.getCurrentElement());
-					}
-					if(shape != null) {
-						this.layout.addShape(shape);
-					}
+					this.layout.createShape(shapeType, variant);
 				}.bind(this));
 				
 				this.elements['shapeTypes'].appendChild(button);

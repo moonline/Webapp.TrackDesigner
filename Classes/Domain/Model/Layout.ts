@@ -1,6 +1,8 @@
 import Point = require("Classes/Domain/Model/Point");
 import ConnectionPoint = require("Classes/Domain/Model/ConnectionPoint");
 import Shape = require("Classes/Domain/Model/Shape");
+import ShapeType = require("Classes/Domain/Model/ShapeType");
+import Variant = require("Classes/Domain/Model/Variant");
 
 import Observable = require("Classes/Utility/Observable");
 import Observer = require("Classes/Utility/Observer");
@@ -49,6 +51,20 @@ class Layout extends Observable implements Observer {
 		this.connectNearConnectionPoint(shape);
 		shape.addObserver(this);
 		this.setCurrentElement(shape);
+	}
+	
+	public createShape(shapeType: ShapeType, variant: Variant): void {
+		var shape: Shape;
+		if(this.getCurrentElement() instanceof Shape) {
+			var shape: Shape = Shape.createFromShape(shapeType, variant, this.getCurrentElement());
+		} else if(this.getCurrentElement() instanceof Point) {
+			var shape: Shape = Shape.createShape(shapeType, variant, this.getCurrentElement());
+		} else if(this.getCurrentElement() instanceof ConnectionPoint) {
+			var shape: Shape = Shape.createFromConnectionPoint(shapeType, variant, this.getCurrentElement());
+		}
+		if(shape != null) {
+			this.addShape(shape);
+		}
 	}
 	
 	private adjustLayoutIfShapeOutside(shape: Shape): void {
