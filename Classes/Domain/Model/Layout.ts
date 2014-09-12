@@ -134,12 +134,24 @@ class Layout extends Observable implements Observer {
 	}
 	
 	public setCurrentElementByPosition(position: Point, config: any): void {
+		var connectionPointFound: boolean = false;
 		for(var spi: number = this.shapes.length-1; spi >= 0; spi--) {
 			if(position.isInSquare(this.shapes[spi].getPosition(), this.shapes[spi].getVariant().getWidth()+this.shapes[spi].getVariant().getHeight())) {
 				if(position.isInRectangle(this.shapes[spi].getPosition(), this.shapes[spi].getVariant().getWidth(), this.shapes[spi].getVariant().getHeight())) {
 					this.setCurrentElement(this.shapes[spi]);
-					return;
+					connectionPointFound = true;
 				}
+			}
+			var freeConnectionPoints: ConnectionPoint[] = this.shapes[spi].getFreePoints();
+			for(var cpi in freeConnectionPoints) {
+				if(position.isInCircle(freeConnectionPoints[cpi].getPosition(), config.connectionPointSize)) {
+					this.setCurrentElement(freeConnectionPoints[cpi]);
+					connectionPointFound = true;
+				}
+			}
+			// if shape matched, check for matching connection point before return because connectionpoints overlays shapes
+			if(connectionPointFound) {
+				return;
 			}
 		}
 		this.setCurrentElement(position);

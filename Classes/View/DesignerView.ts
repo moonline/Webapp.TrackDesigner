@@ -23,7 +23,7 @@ class DesignerView implements Observer {
 	constructor(layout: Layout, shapeTypes: { [index: string]: ShapeType; }, variantTypes: { [index: string]: VariantType; }) {
 		this.viewConfig = {
 			shapePointSize: 50,
-			connectionPointSize: 10,
+			connectionPointSize: 15,
 			connectedPointSize: 2,
 			freePointSize: 10
 		}
@@ -150,7 +150,11 @@ class DesignerView implements Observer {
 			var connectionPoints: ConnectionPoint[] = shape.getConnectionPoints();
 			for(var cpi in connectionPoints) {
 				if(connectionPoints[cpi].getConnection() == null) {
-					this.drawPoint(connectionPoints[cpi].getPosition(), this.viewConfig.connectionPointSize, "rgb(0,255,0)", "rgb(0,255,0)");
+					if(connectionPoints[cpi] === this.layout.getCurrentElement()) {
+						this.drawPoint(connectionPoints[cpi].getPosition(), this.viewConfig.connectionPointSize, "rgb(255,140,0)", "rgb(255,140,0)");
+					} else {
+						this.drawPoint(connectionPoints[cpi].getPosition(), this.viewConfig.connectionPointSize, "rgb(0,255,0)", "rgb(0,255,0)");
+					}
 				} else {					
 					this.drawPoint(connectionPoints[cpi].getPosition(), this.viewConfig.connectedPointSize, "rgb(255,255,255)", "rgb(255,255,255)");
 				}

@@ -121,6 +121,16 @@ class Shape extends Observable {
 		return connectedPoints;
 	}
 	
+	public getFreePoints(): ConnectionPoint[] {
+		var freePoints: ConnectionPoint[] = [];
+		for(var i in this.connectionPoints) {
+			if(this.connectionPoints[i].getConnection() == null) {
+				freePoints.push(this.connectionPoints[i]);
+			}
+		}
+		return freePoints;
+	}
+	
 	public getFirstNeighbor(): Shape {
 		for(var i in this.connectionPoints) {
 			if(this.connectionPoints[i].connection != null) {
