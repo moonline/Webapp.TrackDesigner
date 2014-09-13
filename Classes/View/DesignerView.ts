@@ -140,7 +140,7 @@ class DesignerView implements Observer {
 		this.draw();
 	}
 	
-	public draw(): void {
+	public draw(drawControlElements: boolean = true): void {
 		this.canvas.clearRect(0, 0, (<HTMLCanvasElement>this.elements['canvas']).width, (<HTMLCanvasElement>this.elements['canvas']).height);
 		this.drawBackground();
 		
@@ -154,7 +154,7 @@ class DesignerView implements Observer {
 				this.drawRotatedImage(img, shape.getPosition(), shape.getVariant().getWidth(), shape.getVariant().getHeight());
 			}
 			
-			if(shape === this.layout.getCurrentElement()) {				
+			if(drawControlElements && shape === this.layout.getCurrentElement()) {				
 				this.canvas.globalAlpha = 0.4;
 				this.drawRectangle(shape.getCorners(), "rgb(255,255,0)", "rgb(255,255,0)");
 				this.canvas.globalAlpha = 1;
@@ -163,7 +163,7 @@ class DesignerView implements Observer {
 			
 			var connectionPoints: ConnectionPoint[] = shape.getConnectionPoints();
 			for(var cpi in connectionPoints) {
-				if(connectionPoints[cpi].getConnection() == null) {
+				if(drawControlElements && connectionPoints[cpi].getConnection() == null) {
 					if(connectionPoints[cpi] === this.layout.getCurrentElement()) {
 						this.drawPoint(connectionPoints[cpi].getPosition(), this.viewConfig.connectionPointSize, "rgb(255,140,0)", "rgb(255,140,0)");
 					} else {
@@ -175,7 +175,7 @@ class DesignerView implements Observer {
 			}
 		}		
 		
-		if(this.layout.getCurrentElement() instanceof Point) {
+		if(drawControlElements && this.layout.getCurrentElement() instanceof Point) {
 			this.drawPoint(this.layout.getCurrentElement(), this.viewConfig.freePointSize, "rgb(255,140,0)", "rgb(255,140,0)");
 		}
 	}
@@ -253,10 +253,12 @@ class DesignerView implements Observer {
 	}
 	
 	private exportLayout(): void {
+		this.draw(false);
 		window.open(
 			(<HTMLCanvasElement>this.elements['canvas']).toDataURL("image/png"),
 			'_blank'
 		);
+		this.draw();
 	}
 	
 	public notify(event: EventType, notifier: Observable, subject: any) {
