@@ -102,7 +102,8 @@ class DesignerView implements Observer {
 			this.elements['variantTypes'].appendChild(option);
 		}.bind(this));
 		
-		this.initializeUiElement('shapeTypes').addEventListener('change', function(event) {
+		this.initializeUiElement('shapeTypes')
+		this.elements['variantTypes'].addEventListener('change', function(event) {
 			this.createShapeTypesMenu();
 		}.bind(this));		
 		this.createShapeTypesMenu();
