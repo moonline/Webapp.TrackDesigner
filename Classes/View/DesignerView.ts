@@ -52,6 +52,7 @@ class DesignerView implements Observer {
 				
 				var button = document.createElement('button');
 				button.innerHTML = '<img class="track" src="'+variant.getImage()+'" alt="'+shapeType.getName()+'" />';
+				button.title = shapeType.getName();
 				
 				button.addEventListener('click', function(event) {
 					this.layout.createShape(shapeType, variant);
@@ -85,6 +86,7 @@ class DesignerView implements Observer {
 				option.selected = true;
 			}
 			option.value = key;
+			option.title = variantType.getName();
 			
 			option.innerHTML = '<img class="icon" src="'+variantType.getImage()+'" /><span class="label">'+variantType.getName()+'</span>';
 			
