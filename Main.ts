@@ -24,4 +24,5 @@ var requireJS = new RequireJS({
 
 requireJS.load(["Classes/Application/TrackController"], (TrackController) => {
 	var application = new TrackController();
+	application.designerAction();
 });

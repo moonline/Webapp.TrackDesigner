@@ -1,21 +1,28 @@
 import Shape = require("Classes/Domain/Model/Shape");
+import ShapeType = require("Classes/Domain/Model/ShapeType");
 import Point = require("Classes/Domain/Model/Point");
 import ConnectionPoint = require("Classes/Domain/Model/ConnectionPoint");
 import Vector = require("Classes/Domain/Model/Vector");
-import Playground = require("Classes/Domain/Model/Playground");
+import VariantType = require("Classes/Domain/Model/VariantType");
+import Variant = require("Classes/Domain/Model/Variant");
+
+import Layout = require("Classes/Domain/Model/Layout");
+import DesignerView = require("Classes/View/DesignerView");
+
+import ShapeConfiguration = require("Configuration/ShapeConfiguration");
+
 
 class TrackController {
-	playground: Playground;
-	startingElements: Shape[];
+	shapeTypes: { [index: string]: ShapeType; } = {};
+	variantTypes: { [index: string]: VariantType; } = {};
 	
 	constructor() {
-		this.playground = new Playground(<HTMLCanvasElement>document.getElementById('canvas'));
+	}
 	
-		var straightRail = new Shape(new Point(100,100),[],"Straight");
-		straightRail.createConnectionPoint(new Vector(6.4, 0.5), 0.5);
-		straightRail.createConnectionPoint(new Vector(6.4, 0.0), 0.0);
-		this.playground.addStartShape(straightRail);
-		this.playground.draw();
+	public designerAction(): void {
+		var layout: Layout = new Layout();
+		layout.setStartPoint(new Point(100,100));
+		var designerView: DesignerView = new DesignerView(layout, ShapeConfiguration.shapeTypes, ShapeConfiguration.variantTypes);
 	}
 }
 

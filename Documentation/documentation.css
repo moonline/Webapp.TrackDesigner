@@ -1,0 +1,57 @@
+/* general */
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+html, body { margin: 0; font-family: Arial, Helvetica, sans-serif; }
+html { background: #F0F0F0; }
+body { margin: 2rem; padding: 2rem; box-shadow: 0 0 0.5rem silver; background: white; counter-reset: chapter; }
+
+
+/* font */
+h1 { background: teal; background: linear-gradient(#0080A0,#008080); padding: 2rem; margin: -2rem -2rem 2rem -2rem; color: white; }
+p, pre, dt, dl, li, h1, h2, h3, h4, td, th { word-wrap:break-word; }
+pre { max-width: 90%; white-space: pre-wrap; word-wrap:break-word; }
+
+h2 { border-bottom: 1px solid black; margin-top: 2rem; counter-increment: chapter; counter-reset: subchapter; }
+h2::before { content: counter(chapter) ". "; }
+h3 { counter-increment: subchapter; }
+h3::before { content: counter(chapter) "." counter(subchapter) ". "; }
+
+
+/* images */
+img { max-width: 100%; }
+h1 img { background: white; border-radius: 1rem; width: 1.5rem; padding: 0px; margin-right: 1rem; height: 1.5rem; }
+
+figure { margin: 0.5rem; padding: 0; max-width: 100%; }
+figcaption { font-style: italic; }
+
+
+/* lists */
+dt { font-weight: bold; }
+.tableOfContents { background: lavender; padding: 0.5rem; list-style-position: inside; text-decoration: none; margin: 2rem 0; }
+ul.tableOfContents { list-style-type: none; }
+.tableOfContents a, tableOfContents a:link, tableOfContents a:visited { text-decoration: none; }
+.tableOfContents a:hover { color: gray; }
+
+
+/* colors */
+span.green { color: green; }
+span.orange { color: orange; }
+span.icon { font-weight: bold; font-size: 1rem; }
+
+
+/* tables */
+table {  border-collapse: collapse; width: 100%; }
+table td, table, th { padding: 0.5rem; text-align: left; }
+table th { background: cornflowerblue; color: black; }
+table td { background: lavender; }
+
+
+/* links */
+a, a:link, a:active, a:hover, a:visited { color: black; }
+
+
+/* mobile devices (portrait and landscape) */
+@media only screen and (max-device-width : 800px) {
+	body { margin: 0; padding: 0.5rem; }
+	h1 { margin: -0.5rem -0.5rem 1rem -0.5rem; padding: 1rem; }
+}

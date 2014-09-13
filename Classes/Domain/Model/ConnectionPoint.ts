@@ -4,14 +4,12 @@ import Point = require("Classes/Domain/Model/Point");
 
 class ConnectionPoint {
 	shape: Shape;
-	distanceFromCenter: Vector;
-	angle: number;
+	incrementalPosition: Vector;
 	connection: ConnectionPoint;
 
-	constructor(shape: Shape, distanceFromCenter: Vector, angle: number = 0, connection: ConnectionPoint = null) {
+	constructor(shape: Shape, incrementalPosition: Vector, connection: ConnectionPoint = null) {
 		this.shape = shape;
-		this.distanceFromCenter = distanceFromCenter;
-		this.angle = angle;
+		this.incrementalPosition = incrementalPosition;
 		this.connection = connection;
 	}
 	
@@ -29,8 +27,10 @@ class ConnectionPoint {
 	}
 	
 	public removeConnection():void {
-		this.connection.setConnection(null);
-		this.connection = null;
+		if(this.connection != null) {
+			this.connection.setConnection(null);
+			this.connection = null;
+		}
 	}
 	
 	public getShape(): Shape {
@@ -41,8 +41,16 @@ class ConnectionPoint {
 		this.shape = shape;
 	}
 	
+	public getIncrementalPosition(): Vector {
+		return this.incrementalPosition;
+	}
+	
 	public getPosition(): Point {
-		return this.distanceFromCenter.getEndPositionAngeled(this.shape.getPosition());
+		return this.incrementalPosition.getEndPosition(this.shape.getPosition());
+	}
+	
+	public apendShape(shape: Shape) {
+		// TODO:
 	}
 }
 

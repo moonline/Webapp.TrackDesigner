@@ -2,4 +2,13 @@
 *.od*
 *.*-swp
 /Classes/**/*.js
+/Configuration/**/*.js
 /*.js
+*.bak
+*.kate-swp
+
+// eclipse trash
+.project
+/.settings/*
+/Test
+/Resources/Libraries/TsUnit/

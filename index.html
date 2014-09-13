@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<title>Packing list</title>
+	<title>TrackDesigner</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width">
 
@@ -9,17 +9,69 @@
 
 		<!-- styles -->
 		<link href="Resources/Styles/browserReset.css" type="text/css" rel="stylesheet" />
-
-		<script src="Resources/Libraries/RequireJS/require.dev.js" data-main="Main.js"></script>
-
+		<link href="Resources/Styles/app.css" type="text/css" rel="stylesheet" />
 	</head>
 	<body data-ng-view>
-		<form>
-			<input type="button" name="Straight" value="Straight" onclick="setRail('straight');">
-			<input type="button" name="Curve Left" value="Curve Left" onclick="setRail('curveLeft');">
-			<input type="button" name="Curve Right" value="Curve Right" onclick="setRail('curveRight');">
-			<input type="button" name="Draw" value="Draw" onclick="draw();">
-		</form>
-		<canvas id="canvas" width="800" height="800"></canvas>
+		<div class="page">
+			<header>
+				<h1>Track designer</h1>
+				<div class="mainMenu">
+					<button id="buttonExport" class="menuItem" title="Export layout (png)">
+						<img class="icon" src="Resources/Img/icon-export.png" />
+						<span class="label">Export layout (png)</span>
+					</button>
+					<!--<button id="buttonSave" class="menuItem" title="Save layout ">
+						<img class="icon" src="Resources/Img/icon-save.png" />
+						<span class="label">Save layout</span>
+					</button>-->
+					<button id="buttonManual" class="menuItem" title="Manual" onclick="window.open('Documentation/index.html');">
+						<svg class="icon" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="20.773px" height="20.773px" viewBox="0 0 20.773 20.773" enable-background="new 0 0 20.773 20.773" xml:space="preserve">
+							<g>
+								<path fill="white" d="M10.331,0C4.595,0.031-0.031,4.706,0,10.443c0.03,5.736,4.708,10.361,10.442,10.331
+									c5.739-0.031,10.362-4.706,10.331-10.442C20.742,4.594,16.07-0.03,10.331,0z M10.434,19.082c-4.802,0.024-8.711-3.846-8.738-8.648
+									C1.671,5.633,5.538,1.718,10.34,1.692s8.716,3.848,8.743,8.647C19.108,15.142,15.235,19.055,10.434,19.082z M11.973,14.932
+									L11.93,7.168L7.923,7.194l0.008,1.699l1.088-0.006l0.032,6.063l-1.154,0.004l0.009,1.623l5.028-0.027l-0.009-1.622L11.973,14.932z
+									M10.446,6.022c0.98-0.004,1.57-0.66,1.565-1.466C11.986,3.73,11.41,3.1,10.467,3.104c-0.94,0.006-1.553,0.644-1.549,1.47
+									C8.923,5.379,9.521,6.029,10.446,6.022z" />
+							</g>
+						</svg>
+						<span class="label">Save layout</span>
+					</button>
+					
+
+
+				</div>		
+			</header>
+			<div class="main" id="main">
+				<div class="subheader">			
+					<div class="elementBrowser" id="shapeTypes"></div>	
+				</div>
+				<div class="content" id="content">
+					<div class="toolbox" id="toolbox">
+						<select id="variantTypes" class="menuItem">
+						
+						</select>
+						<button id="buttonRemove" class="menuItem" title="Delete shape">
+							<img class="icon" src="Resources/Img/icon-delete-black.png" />
+							<span class="label">Delete shape</span>
+						</button>
+						<button id="buttonRotate" class="menuItem" title="Rotate shape">
+							<img class="icon" src="Resources/Img/icon-rotate-black.png" />
+							<span class="label">Rotate shape</span>
+						</button>
+						<button id="moveToFront" class="menuItem" title="Move shape to front">
+							<img class="icon" src="Resources/Img/icon-moveToFront-black.png" />
+							<span class="label">Move to front</span>					
+						</button>					
+					</div>
+					<div id="drawingMapper" class="workbench">
+						<canvas class="canvas" id="layoutArea" width="500" height="500"></canvas>
+					</div>
+				</div>
+			</div>
+			<footer>
+			</footer>
+		</div>
+		<script src="Resources/Libraries/RequireJS/require.dev.js" data-main="Main.js"></script>
 	</body>
 </html>

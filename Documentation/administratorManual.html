@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Track designer documentation - Administrator manual</title>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="documentation.css">
+		<link rel="icon" type="image/png" href="../Resources/Img/appIcon-128.png" />
+	</head>
+	<body>		
+		<h1><img src="../Resources/Img/appIcon-128.png" />Track designer - administrator manual</h1>
+		<a href="index.html">&#x21d0; back to documentation overview</a>
+		
+		<ol class="tableOfContents">
+			<li><a href="#createOwnShapes">Create own shapes</a></li>
+		</ol>
+		
+		
+		<h2 id="createOwnShapes">Create own shapes</h2>
+		<ol>
+			<li>Create a picture of your shape, store it to &quot;Resources/Img/Tracks/&quot;</li>
+			<li>Add description of your shape to &quot;Configuration/ShapeConfiguration.ts&quot;:
+				<pre>
+longCurve: new ShapeType(
+	"Long curve",
+	[new Vector(62.3424, 0.9906, 0.96875),new Vector(62.3424, 0.5094, 0.53125)],
+	[
+		new Variant(ShapeConfiguration.variantTypes['Default'], 255.2, 255.2, "Resources/Img/Tracks/longCurved-Default.png")
+	]
+)
+				</pre>
+				<dl>
+					<dt>ShapeType</dt>
+					<dd>ShapeType(name: string, connectionPoints: Vector[], variants: Variant[])
+					<dt>Variant</dt>
+					<dd>Variant(type: VariantType, figureWidth: number,figureHeight: number, imagePath: string)</dd>
+					<dt>Vector</dt>
+					<dd>Vector(vectorLength: number, vectorAngle(1=360°): number, angleOfEndPointRelativeToShapeAngle: number)
+				</dl>
+			</li>
+			<li>Rebuild TypeScript files: <pre>tsc Main.ts --module AMD</pre></li>
+		</ol>
+		<figure>
+			<img src="shapeLayout.svg" width="800" />
+		</figure>
+	</body>
+</html>
