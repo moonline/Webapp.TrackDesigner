@@ -10,3 +10,5 @@
 // eclipse trash
 .project
 /.settings/*
+/Test
+/Resources/Libraries/TsUnit/
