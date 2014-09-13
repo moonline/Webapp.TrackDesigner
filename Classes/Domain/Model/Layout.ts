@@ -107,6 +107,7 @@ class Layout extends Observable implements Observer {
 				if(this.currentElement === this.lastInsertedShape) {
 					this.currentElement.getType().moveDefaultFirstConnectionPointPositionToNext();
 				}
+				this.notifyObservers(EventType.objectMoved, null);
 			}
 		}
 	}
@@ -157,20 +158,24 @@ class Layout extends Observable implements Observer {
 		this.setCurrentElement(position);
 	}
 	
-	private connectNearConnectionPoint(shape: Shape): ConnectionPoint {
+	private connectNearConnectionPoint(shape: Shape): void {
 		var connectionPoints: ConnectionPoint[] = shape.getConnectionPoints();
 		for(var cpi in connectionPoints) {
 			if(connectionPoints[cpi].getConnection() == null) {
 				for(var spi in this.shapes) {
+					var stopSearching: boolean = false;
+					
 					if(shape != this.shapes[spi]) {
 						var shapeConnectionPoints: ConnectionPoint[] = this.shapes[spi].getConnectionPoints();
 						for(var scpi in shapeConnectionPoints) {
 							if(connectionPoints[cpi].getPosition().equals(shapeConnectionPoints[scpi].getPosition()) && shapeConnectionPoints[scpi].getConnection() == null) {
 								connectionPoints[cpi].connectTo(shapeConnectionPoints[scpi]);
-								return shapeConnectionPoints[scpi];
+								stopSearching = true;
+								break;
 							}
 						}
 					}
+					if(stopSearching) { break; }
 				}
 			}
 		}
