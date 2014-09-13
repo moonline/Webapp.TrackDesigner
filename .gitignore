@@ -2,6 +2,7 @@
 *.od*
 *.*-swp
 /Classes/**/*.js
+/Configuration/**/*.js
 /*.js
 *.bak
 *.kate-swp

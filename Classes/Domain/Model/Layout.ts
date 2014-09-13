@@ -168,7 +168,7 @@ class Layout extends Observable implements Observer {
 					if(shape != this.shapes[spi]) {
 						var shapeConnectionPoints: ConnectionPoint[] = this.shapes[spi].getConnectionPoints();
 						for(var scpi in shapeConnectionPoints) {
-							if(connectionPoints[cpi].getPosition().equals(shapeConnectionPoints[scpi].getPosition()) && shapeConnectionPoints[scpi].getConnection() == null) {
+							if(connectionPoints[cpi].getPosition().isInCircle(shapeConnectionPoints[scpi].getPosition(), 1) && shapeConnectionPoints[scpi].getConnection() == null) {
 								connectionPoints[cpi].connectTo(shapeConnectionPoints[scpi]);
 								stopSearching = true;
 								break;
