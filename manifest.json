@@ -2,15 +2,15 @@
 	"name": "Track designer",
 	"version": "0.1",
 	"description": "Design railroad tracks and streets",
-	"launch_path": "index.html",
+	"launch_path": "/index.html",
 	"icons": {
 		"256": "/Resources/Img/appIcon-256.png",
 		"128": "/Resources/Img/appIcon-128.png",
 		"16": "/Resources/Img/appIcon-16.png"
 	},
 	"developer": {
-		"name": "Tobias Blaser",
-		"url": "http://www.colvarim.ch"
+		"name": "Moonline",
+		"url": "http://www.github.com/moonline"
 	},
 	"default_locale": "en"
 }
