@@ -9,81 +9,48 @@
 
 		<!-- styles -->
 		<link href="Resources/Styles/browserReset.css" type="text/css" rel="stylesheet" />
-
-		
-		<style>
-			* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
-			
-			html, body { width: 100%; height: 100%; }
-			body { font-family: Ubuntu, Arial, Helvetica, sans-serif; background: gainsboro; line-height: 1; font-size: 100%; }
-			
-			.page { display: flex; flex-direction: column; width: 100%; height: 100%; }
-				.page header { 
-					height: 5rem; display: flex; flex-direction: row; justify-content: space-between; align-items: stretch;
-					background: linear-gradient(#CD6723, #BB482D); color: white; box-shadow: 0px 0px 0.25rem #000;
-				}
-					.page header .toolbar { display: flex; flex-direction: row; align-items: center; padding: 1rem; }
-						.page header .toolbar button { border-left: 0.05rem solid silver; height: 100%; width: 3rem; padding: 0 1rem; }
-						.toolbar button img.icon { max-height: 100%; max-height: 100%; width: auto: height: auto; }
-					
-				.page .subheader { display: flex; flex-direction: row; background: #EAEAE7; padding: 0.5rem; height: 5rem; }
-						#shapeTypes { display: flex; flex-direction: row; justify-content: flex-start; margin: 0 0.5rem; }
-						#shapeTypes button { width: 4rem; height: 100%; padding: 0; display: inline-block; }
-					
-				.page .content {}
-					#layoutArea { background: white; }
-					#drawingMapper { width: 100%; overflow: scroll; background: white; }
-				
-				.page footer {}
-			
-			h1 { font-size: 1.5rem; padding: 1rem; }
-			
-			#shapeTypes img.track { width: auto; height: auto; max-width: 100%; max-height: 100%; display: inline-block; }
-			
-			
-			
-			
-			.button, button, select { display: inline-block; 
-				background: none; border: none; color: white; 
-				-webkit-appearance: none; -moz-appearance: none; appearance: none;
-			}
-			.button:hover, button:hover, select:hover, .button:active, button:active, select:active { opacity: 0.75; }
-			
-			.button span.label, button span.label { display: none; }
-		</style>
+		<link href="Resources/Styles/app.css" type="text/css" rel="stylesheet" />
 	</head>
 	<body data-ng-view>
 		<div class="page">
 			<header>
 				<h1>Track designer</h1>
-				<div class="toolbar">
-					<select id="variantTypes">
-					
-					</select>
-					<button id="buttonExport" title="export layout (png)">
+				<div class="mainMenu">
+					<button id="buttonExport" class="menuItem" title="Export layout (png)">
 						<img class="icon" src="Resources/Img/icon-export.png" />
-						<span class="label">export layout (png)</span>
+						<span class="label">Export layout (png)</span>
 					</button>
-					<button id="buttonRemove" title="delete shape">
-						<img class="icon" src="Resources/Img/icon-delete.png" />
-						<span class="label"delete shape</span>
-					</button>
-					<button id="buttonRotate" title="rotate shape">
-						<img class="icon" src="Resources/Img/icon-rotate.png" />
-						<span class="label">rotate shape</span>
-					</button>
-					<button id="moveToFront" title="Move shape to front">
-						<!-- <img class="icon" src="Resources/Img/icon-rotate.png" />-->
-						<span class="label">move to front</span>					
+					<button id="buttonSave" class="menuItem" title="Save layout ">
+						<img class="icon" src="Resources/Img/icon-save.png" />
+						<span class="label">Save layout</span>
 					</button>
 				</div>		
 			</header>
-			<div class="subheader">			
-				<div id="shapeTypes"></div>	
-			</div>
-			<div class="content">
-				<div id="drawingMapper">
-					<canvas id="layoutArea" width="500" height="500"></canvas>
+			<div class="main" id="main">
+				<div class="subheader">			
+					<div class="elementBrowser" id="shapeTypes"></div>	
+				</div>
+				<div class="content" id="content">
+					<div class="toolbox" id="toolbox">
+						<select id="variantTypes" class="menuItem">
+						
+						</select>
+						<button id="buttonRemove" class="menuItem" title="Delete shape">
+							<img class="icon" src="Resources/Img/icon-delete-black.png" />
+							<span class="label">Delete shape</span>
+						</button>
+						<button id="buttonRotate" class="menuItem" title="Rotate shape">
+							<img class="icon" src="Resources/Img/icon-rotate-black.png" />
+							<span class="label">Rotate shape</span>
+						</button>
+						<button id="moveToFront" class="menuItem" title="Move shape to front">
+							<img class="icon" src="Resources/Img/icon-moveToFront-black.png" />
+							<span class="label">Move to front</span>					
+						</button>					
+					</div>
+					<div id="drawingMapper" class="workbench">
+						<canvas class="canvas" id="layoutArea" width="500" height="500"></canvas>
+					</div>
 				</div>
 			</div>
 			<footer>

@@ -85,7 +85,8 @@ class DesignerView implements Observer {
 				option.selected = true;
 			}
 			option.value = key;
-			option.text = variantType.getName();
+			
+			option.innerHTML = '<img class="icon" src="'+variantType.getImage()+'" /><span class="label">'+variantType.getName()+'</span>';
 			
 			this.elements['variantTypes'].appendChild(option);
 		}.bind(this));

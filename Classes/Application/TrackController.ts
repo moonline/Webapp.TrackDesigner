@@ -30,14 +30,14 @@ class TrackController {
 	
 	private createVariantTypes(): { [index: string]: VariantType; } {
 		return {
-			Default: new VariantType('Default'),
-			FoundationLess: new VariantType('Foundation less'),
-			OutboundLeft: new VariantType('Outbound left'),
-			OutboundRight: new VariantType('Outbound right'),
-			Bridge: new VariantType('Bridge'),
+			Default: new VariantType('Default', 'Resources/Img/VariantTypes/default.png'),
+			FoundationLess: new VariantType('Foundation less', 'Resources/Img/VariantTypes/foundationLess.png'),
+			OutboundLeft: new VariantType('Outbound left', 'Resources/Img/VariantTypes/outboundLeft.png'),
+			OutboundRight: new VariantType('Outbound right', 'Resources/Img/VariantTypes/outboundRight.png'),
+			Bridge: new VariantType('Bridge', 'Resources/Img/VariantTypes/bridge.png'),
 			Tunnel: new VariantType('Tunnel'),
-			TunnelPortal1: new VariantType('Tunnel portal 1'),
-			TunnelPortal2: new VariantType('Tunnel portal 2'),
+			TunnelPortal1: new VariantType('Tunnel portal 1', 'Resources/Img/VariantTypes/tunnelPortal.png'),
+			TunnelPortal2: new VariantType('Tunnel portal 2', 'Resources/Img/VariantTypes/tunnelPortal.png'),
 			Grass: new VariantType('Grass'),
 			Water: new VariantType('Water')
 		};
