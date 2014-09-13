@@ -36,6 +36,11 @@ class DesignerView implements Observer {
 		
 		this.initializeView();
 	}
+
+	private initializeUiElement(elementId: string): HTMLElement {
+		this.elements[elementId] = <HTMLElement>document.getElementById(elementId);
+		return this.elements[elementId];
+	}
 	
 	private createShapeTypesMenu(): void {
 		this.elements['shapeTypes'].innerHTML = '';
@@ -78,7 +83,7 @@ class DesignerView implements Observer {
 		
 		this.canvas = (<HTMLCanvasElement>this.elements['canvas']).getContext('2d');
 		
-		this.elements['variantTypes'] = <HTMLElement>document.getElementById('variantTypes');
+		this.initializeUiElement('variantTypes');
 		Object.keys(this.variantTypes).forEach(function(key) {
 			var variantType: VariantType = this.variantTypes[key];
 			var option = document.createElement('option');
@@ -93,14 +98,12 @@ class DesignerView implements Observer {
 			this.elements['variantTypes'].appendChild(option);
 		}.bind(this));
 		
-		this.elements['shapeTypes'] = <HTMLElement>document.getElementById('shapeTypes');
-		this.elements['variantTypes'].addEventListener('change', function(event) {
+		this.initializeUiElement('shapeTypes').addEventListener('change', function(event) {
 			this.createShapeTypesMenu();
 		}.bind(this));		
 		this.createShapeTypesMenu();
 		
-		this.elements['buttonRemove'] = <HTMLElement>document.getElementById('buttonRemove');
-		this.elements['buttonRemove'].addEventListener('click', function(event) {
+		this.initializeUiElement('buttonRemove').addEventListener('click', function(event) {
 			this.layout.removeCurrentShape();
 		}.bind(this));		
 		
@@ -110,8 +113,7 @@ class DesignerView implements Observer {
 			}
 		}.bind(this));
 		
-		this.elements['buttonRotate'] = <HTMLElement>document.getElementById('buttonRotate');
-		this.elements['buttonRotate'].addEventListener('click', function(event) {
+		this.initializeUiElement('buttonRotate').addEventListener('click', function(event) {
 			this.layout.rotateCurrentShape();
 		}.bind(this));
 		
@@ -121,13 +123,11 @@ class DesignerView implements Observer {
 			}
 		}.bind(this));
 		
-		this.elements['buttonExport'] = <HTMLElement>document.getElementById('buttonExport');
-		this.elements['buttonExport'].addEventListener('click', function(event) {
+		this.initializeUiElement('buttonExport').addEventListener('click', function(event) {
 			this.exportLayout();
 		}.bind(this));
 		
-		this.elements['moveToFront'] = <HTMLElement>document.getElementById('moveToFront');
-		this.elements['moveToFront'].addEventListener('click', function(event) {
+		this.initializeUiElement('moveToFront').addEventListener('click', function(event) {
 			if(this.layout.getCurrentElement() instanceof Shape) {
 				this.layout.moveShapeToFront(this.layout.getCurrentElement());
 			}
