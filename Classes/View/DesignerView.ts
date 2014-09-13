@@ -182,10 +182,14 @@ class DesignerView implements Observer {
 
 	private scrollToCenter(point: Point): void {
 		var scrollContainer: HTMLDivElement = <HTMLDivElement>this.elements['canvas'].parentNode;
-		var scrollToX = (point.getX()/this.factor)-(scrollContainer.clientWidth/2);
-		var scrollToY = (point.getY()/this.factor)-(scrollContainer.clientHeight/2);
-		scrollContainer.scrollLeft = scrollToX;
-		scrollContainer.scrollTop = scrollToY;
+		var scrollToX = (point.getX()*this.factor)-(scrollContainer.clientWidth/2);
+		var scrollToY = (point.getY()*this.factor)-(scrollContainer.clientHeight/2);
+		if(scrollToX > 0) {
+			scrollContainer.scrollLeft = scrollToX;
+		}
+		if(scrollToX > 0) {
+			scrollContainer.scrollTop = scrollToY;
+		}
 	}
 	
 	private drawPoint(position: Point, radius: number, fillStyle: string = "rgb(0,0,0)", strokeStyle: string = "rgb(0,0,0)"): void {
