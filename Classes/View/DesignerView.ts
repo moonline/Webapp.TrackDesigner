@@ -61,6 +61,9 @@ class DesignerView implements Observer {
 				
 				button.addEventListener('click', function(event) {
 					this.layout.createShape(shapeType, variant);
+					if(this.layout.getCurrentElement() instanceof Shape) {
+						this.scrollToCenter(this.layout.getCurrentElement().getPosition());
+					}
 				}.bind(this));
 				
 				this.elements['shapeTypes'].appendChild(button);
@@ -71,9 +74,10 @@ class DesignerView implements Observer {
 	private initializeView(): void {
 		var canvasElement: HTMLElement = <HTMLElement>document.getElementById('layoutArea');
 		this.elements['canvas'] = canvasElement;
+
 		canvasElement.addEventListener('click', function(event) {
-			var x: number = event.pageX - canvasElement.offsetLeft;
-			var y: number = event.pageY - canvasElement.offsetTop;
+			var x: number = event.pageX - canvasElement.offsetLeft + (<HTMLDivElement>canvasElement.parentNode).scrollLeft;
+			var y: number = event.pageY - canvasElement.offsetTop + (<HTMLDivElement>canvasElement.parentNode).scrollTop;
 
 			this.layout.setCurrentElementByPosition(new Point(x/this.factor,y/this.factor),this.viewConfig);
 		}.bind(this));
@@ -174,6 +178,14 @@ class DesignerView implements Observer {
 		if(this.layout.getCurrentElement() instanceof Point) {
 			this.drawPoint(this.layout.getCurrentElement(), this.viewConfig.freePointSize, "rgb(255,140,0)", "rgb(255,140,0)");
 		}
+	}
+
+	private scrollToCenter(point: Point): void {
+		var scrollContainer: HTMLDivElement = <HTMLDivElement>this.elements['canvas'].parentNode;
+		var scrollToX = (point.getX()/this.factor)-(scrollContainer.clientWidth/2);
+		var scrollToY = (point.getY()/this.factor)-(scrollContainer.clientHeight/2);
+		scrollContainer.scrollLeft = scrollToX;
+		scrollContainer.scrollTop = scrollToY;
 	}
 	
 	private drawPoint(position: Point, radius: number, fillStyle: string = "rgb(0,0,0)", strokeStyle: string = "rgb(0,0,0)"): void {
