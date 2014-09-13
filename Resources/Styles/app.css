@@ -25,6 +25,7 @@ body { font-family: Ubuntu, Arial, Helvetica, sans-serif; background: gainsboro;
 		header .mainMenu { display: flex; flex-direction: row; align-items: center; }
 		
 			.mainMenu .menuItem { color: white; }
+			.mainMenu .menuItem svg.icon { height: 3rem; width: auto; }
 			
 	.page #main { display: flex; flex-direction: column; height: 100%; }
 		
@@ -42,7 +43,8 @@ body { font-family: Ubuntu, Arial, Helvetica, sans-serif; background: gainsboro;
 			.toolbox .menuItem, .toolbox select { border-bottom: 1px solid silver; color: black; }
 			.toolbox select.menuItem select { border: none; }
 			.toolbox select.menuItem option { display: flex; flex-direction: row; background: white; border: none; }
-			.toolbox select.menuItem img.icon { height: 3.5rem; width: auto; display: inline-block; }
+			.toolbox select.menuItem .icon { height: 3.5rem; width: auto; display: inline-block; }
+			
 			.toolbox select.menuItem span.label { display: inline-block; padding: 1rem; }
 			.toolbox .menuItem:active { background: gray; }
 			

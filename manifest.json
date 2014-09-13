@@ -1,7 +1,7 @@
 {
 	"name": "Track designer",
-	"version": "0.1",
-	"description": "Design railroad tracks and streets",
+	"version": "1.0.0",
+	"description": "Design l-gauge railroad tracks and streets",
 	"launch_path": "/index.html",
 	"icons": {
 		"256": "/Resources/Img/appIcon-256.png",
@@ -9,7 +9,7 @@
 		"16": "/Resources/Img/appIcon-16.png"
 	},
 	"developer": {
-		"name": "Moonline",
+		"name": "moonline",
 		"url": "http://www.github.com/moonline"
 	},
 	"default_locale": "en"

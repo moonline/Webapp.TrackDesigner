@@ -1,7 +1,7 @@
 Track designer
 ==============
 
-An app to design streets, railroads and tracks.
+An app to create l-gauge layouts with streets, railroads and tracks.
 
 
 License
