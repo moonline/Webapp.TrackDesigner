@@ -1,11 +1,13 @@
 *.*~
 *.od*
 *.*-swp
+.~lock*
 /Classes/**/*.js
 /Configuration/**/*.js
 /*.js
 *.bak
 *.kate-swp
+.idea
 
 // eclipse trash
 .project

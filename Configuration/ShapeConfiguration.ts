@@ -85,7 +85,7 @@ class ShapeConfiguration {
 		),
 		railRoadCrossingDouble: new ShapeType(
 			"Railroad crossing double track",
-			[new Vector(131.52707, 0.03899, 0.0), new Vector(131.52707, 0.46101, 0.5), new Vector(131.52707, 0.53899, 0.5), new Vector(131.52707, 0.96101, 0.0)],
+			[new Vector(131.52707, 0.03899, 0.0), new Vector(131.52707, 0.46101, 0.5), new Vector(131.52707, 0.53899, 0.5), new Vector(131.52707, 0.96101, 0.0), new Vector(127.6, 0.25, 0.25), new Vector(127.6, 0.75, 0.75)],
 			[
 				new Variant(ShapeConfiguration.variantTypes['S45V'], 255.2, 255.2, "Resources/Img/Tracks/railRoadCrossingDouble-4-5V.png"),
 				new Variant(ShapeConfiguration.variantTypes['S12V'], 255.2, 255.2, "Resources/Img/Tracks/railRoadCrossingDouble-12V.png")
