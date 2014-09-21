@@ -108,7 +108,7 @@ class Shape extends Observable {
 	}
 	
 	private canRotate(): boolean {
-		return this.getConnectedPoints().length == 1;
+		return this.getConnectedPoints().length <= 1;
 	}
 	
 	private getConnectedPoints(): ConnectionPoint[] {
@@ -155,7 +155,9 @@ class Shape extends Observable {
 	 */
 	public rotate(): void {
 		var connectedPoints: ConnectionPoint[] = this.getConnectedPoints();
-		if(connectedPoints.length == 1) {
+		if(connectedPoints.length < 1) {
+			this.center.turnAngle(1/32);
+		} else if(connectedPoints.length == 1) {
 			// unbind old point
 			var currentConnectionPoint: ConnectionPoint = connectedPoints[0];
 			var connectedNeighbor = currentConnectionPoint.getConnection();

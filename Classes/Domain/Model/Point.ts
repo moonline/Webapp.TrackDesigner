@@ -54,7 +54,7 @@ class Point {
 	}
 	
 	public turnAngle(deltaAngle: number) {
-		this.angle += deltaAngle;
+		this.angle = (this.angle+deltaAngle)%1;
 	}
 	
 	public isInCircle(position: Point, radius: number):boolean {

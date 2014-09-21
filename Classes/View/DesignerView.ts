@@ -47,28 +47,55 @@ class DesignerView implements Observer {
 		
 		var selectElement: HTMLSelectElement = (<HTMLSelectElement>this.elements['variantTypes']);
 		var selectedVariantIndex: number = selectElement.selectedIndex;
-		var variantType: VariantType = this.variantTypes[selectElement.options[selectedVariantIndex].value];		
-		var shapeTypesButtons: HTMLButtonElement[] = [];
-	
-		Object.keys(this.shapeTypes).forEach(function(key) {
-			var shapeType: ShapeType = this.shapeTypes[key];
-			if(shapeType.hasVariant(variantType)) {
-				var variant: Variant = shapeType.getVariantByType(variantType);
-				
-				var button = document.createElement('button');
-				button.innerHTML = '<img class="track" src="'+variant.getImage()+'" alt="'+shapeType.getName()+'" />';
-				button.title = shapeType.getName();
-				
-				button.addEventListener('click', function(event) {
-					this.layout.createShape(shapeType, variant);
-					if(this.layout.getCurrentElement() instanceof Shape) {
-						this.scrollToCenter(this.layout.getCurrentElement().getPosition());
+		if(selectedVariantIndex > 0) {
+			var variantType: VariantType = this.variantTypes[selectElement.options[selectedVariantIndex].value];
+			var shapeTypesButtons: HTMLButtonElement[] = [];
+
+			Object.keys(this.shapeTypes).forEach(function(key) {
+				var shapeType: ShapeType = this.shapeTypes[key];
+				if(shapeType.hasVariant(variantType)) {
+					var variant: Variant = shapeType.getVariantByType(variantType);
+
+					var button = document.createElement('button');
+					button.innerHTML = '<img class="track" src="'+variant.getImage()+'" alt="'+shapeType.getName()+'" />';
+					button.title = shapeType.getName();
+
+					button.addEventListener('click', function(event) {
+						this.layout.createShape(shapeType, variant);
+						if(this.layout.getCurrentElement() instanceof Shape) {
+							this.scrollToCenter(this.layout.getCurrentElement().getPosition());
+						}
+					}.bind(this));
+
+					this.elements['shapeTypes'].appendChild(button);
+				}
+			}.bind(this));
+		} else {
+			Object.keys(this.shapeTypes).forEach(function(key) {
+				var shapeType: ShapeType = this.shapeTypes[key];
+
+				Object.keys(this.variantTypes).forEach(function(vtKey) {
+					var variantType: VariantType = this.variantTypes[vtKey];
+
+					if(shapeType.hasVariant(variantType)) {
+						var variant: Variant = shapeType.getVariantByType(variantType);
+
+						var button = document.createElement('button');
+						button.innerHTML = '<img class="track" src="'+variant.getImage()+'" alt="'+shapeType.getName()+'" />';
+						button.title = shapeType.getName();
+
+						button.addEventListener('click', function(event) {
+							this.layout.createShape(shapeType, variant);
+							if(this.layout.getCurrentElement() instanceof Shape) {
+								this.scrollToCenter(this.layout.getCurrentElement().getPosition());
+							}
+						}.bind(this));
+
+						this.elements['shapeTypes'].appendChild(button);
 					}
 				}.bind(this));
-				
-				this.elements['shapeTypes'].appendChild(button);
-			}
-		}.bind(this));
+			}.bind(this));
+		}
 	}
 	
 	private initializeView(): void {
@@ -88,6 +115,14 @@ class DesignerView implements Observer {
 		this.canvas = (<HTMLCanvasElement>this.elements['canvas']).getContext('2d');
 		
 		this.initializeUiElement('variantTypes');
+
+		// all
+		var option = document.createElement('option');
+		option.value = 'all';
+		option.title = 'All';
+		option.innerHTML = '<span class="label">All</span>';
+		this.elements['variantTypes'].appendChild(option);
+
 		Object.keys(this.variantTypes).forEach(function(key) {
 			var variantType: VariantType = this.variantTypes[key];
 			var option = document.createElement('option');
