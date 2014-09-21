@@ -76,7 +76,7 @@ class DesignerView implements Observer {
 
 				Object.keys(this.variantTypes).forEach(function(vtKey) {
 					var variantType: VariantType = this.variantTypes[vtKey];
-					
+
 					if(shapeType.hasVariant(variantType)) {
 						var variant: Variant = shapeType.getVariantByType(variantType);
 
