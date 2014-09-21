@@ -9,6 +9,8 @@ class ShapeConfiguration {
 		FoundationLess: new VariantType('Foundation less', 'Resources/Img/VariantTypes/foundationLess.png'),
 		S12V: new VariantType('12V Series', 'Resources/Img/VariantTypes/12v.png'),
 		S45V: new VariantType('4.5V Series', 'Resources/Img/VariantTypes/4-5v.png'),
+		S12Vblue: new VariantType('12V Series blue', 'Resources/Img/VariantTypes/12vBlue.png'),
+		S45Vblue: new VariantType('4.5V Series blue', 'Resources/Img/VariantTypes/4-5vBlue.png'),
 		OutboundLeft: new VariantType('Outbound left', 'Resources/Img/VariantTypes/outboundLeft.png'),
 		OutboundRight: new VariantType('Outbound right', 'Resources/Img/VariantTypes/outboundRight.png'),
 		Bridge: new VariantType('Bridge', 'Resources/Img/VariantTypes/bridge.png'),
@@ -27,6 +29,8 @@ class ShapeConfiguration {
 				new Variant(ShapeConfiguration.variantTypes['FoundationLess'], 127.6, 63.8, "Resources/Img/Tracks/railStraight-FoundationLess.png"),
 				new Variant(ShapeConfiguration.variantTypes['S12V'], 127.6, 63.8, "Resources/Img/Tracks/railStraight-12V.png"),
 				new Variant(ShapeConfiguration.variantTypes['S45V'], 127.6, 63.8, "Resources/Img/Tracks/railStraight-4-5V.png"),
+				new Variant(ShapeConfiguration.variantTypes['S12Vblue'], 127.6, 63.8, "Resources/Img/Tracks/railStraight-12Vblue.png"),
+				new Variant(ShapeConfiguration.variantTypes['S45Vblue'], 127.6, 63.8, "Resources/Img/Tracks/railStraight-4-5Vblue.png"),
 				new Variant(ShapeConfiguration.variantTypes['OutboundLeft'], 127.6, 95.7, "Resources/Img/Tracks/railStraight-OutboundLeft.png"),
 				new Variant(ShapeConfiguration.variantTypes['OutboundRight'], 127.6, 95.7, "Resources/Img/Tracks/railStraight-OutboundRight.png"),
 				new Variant(ShapeConfiguration.variantTypes['Bridge'], 127.6, 95.7, "Resources/Img/Tracks/railStraight-Bridge.png"),
@@ -42,7 +46,9 @@ class ShapeConfiguration {
 				new Variant(ShapeConfiguration.variantTypes['Default'], 143.13777, 100.91007, "Resources/Img/Tracks/railCurved-Default.png"), 
 				new Variant(ShapeConfiguration.variantTypes['FoundationLess'], 136.9144, 69.9295, "Resources/Img/Tracks/railCurved-FoundationLess.png"),
 				new Variant(ShapeConfiguration.variantTypes['S12V'], 136.9144, 69.9295, "Resources/Img/Tracks/railCurved-12V.png"),
+				new Variant(ShapeConfiguration.variantTypes['S12Vblue'], 136.9144, 69.9295, "Resources/Img/Tracks/railCurved-12Vblue.png"),
 				new Variant(ShapeConfiguration.variantTypes['S45V'], 136.9144, 69.9295, "Resources/Img/Tracks/railCurved-4-5V.png"),
+				new Variant(ShapeConfiguration.variantTypes['S45Vblue'], 136.9144, 69.9295, "Resources/Img/Tracks/railCurved-4-5Vblue.png"),
 				new Variant(ShapeConfiguration.variantTypes['OutboundLeft'], 143.13777, 100.91007, "Resources/Img/Tracks/railCurved-OutboundLeft.png"),
 				new Variant(ShapeConfiguration.variantTypes['OutboundRight'], 143.13777, 100.91007, "Resources/Img/Tracks/railCurved-OutboundRight.png"),
 				new Variant(ShapeConfiguration.variantTypes['Tunnel'], 136.9144, 69.9295, "Resources/Img/Tracks/railCurved-Tunnel.png")
@@ -55,7 +61,9 @@ class ShapeConfiguration {
 				new Variant(ShapeConfiguration.variantTypes['Default'], 255.2, 159.5, "Resources/Img/Tracks/switchStraightLeft-Default.png"),
 				new Variant(ShapeConfiguration.variantTypes['FoundationLess'], 255.2, 127.6, "Resources/Img/Tracks/switchStraightLeft-FoundationLess.png"),
 				new Variant(ShapeConfiguration.variantTypes['S12V'], 255.2, 127.6, "Resources/Img/Tracks/switchStraightLeft-12V.png"),
-				new Variant(ShapeConfiguration.variantTypes['S45V'], 255.2, 127.6, "Resources/Img/Tracks/switchStraightLeft-4-5V.png")
+				new Variant(ShapeConfiguration.variantTypes['S45V'], 255.2, 127.6, "Resources/Img/Tracks/switchStraightLeft-4-5V.png"),
+				new Variant(ShapeConfiguration.variantTypes['S12Vblue'], 255.2, 127.6, "Resources/Img/Tracks/switchStraightLeft-12Vblue.png"),
+				new Variant(ShapeConfiguration.variantTypes['S45Vblue'], 255.2, 127.6, "Resources/Img/Tracks/switchStraightLeft-4-5Vblue.png")
 			]
 		),
 		switchStraightRight: new ShapeType(
@@ -65,7 +73,9 @@ class ShapeConfiguration {
 				new Variant(ShapeConfiguration.variantTypes['Default'], 255.2, 159.5, "Resources/Img/Tracks/switchStraightRight-Default.png"),
 				new Variant(ShapeConfiguration.variantTypes['FoundationLess'], 255.2, 127.6, "Resources/Img/Tracks/switchStraightRight-FoundationLess.png"),
 				new Variant(ShapeConfiguration.variantTypes['S12V'], 255.2, 127.6, "Resources/Img/Tracks/switchStraightRight-12V.png"),
-				new Variant(ShapeConfiguration.variantTypes['S45V'], 255.2, 127.6, "Resources/Img/Tracks/switchStraightRight-4-5V.png")
+				new Variant(ShapeConfiguration.variantTypes['S45V'], 255.2, 127.6, "Resources/Img/Tracks/switchStraightRight-4-5V.png"),
+				new Variant(ShapeConfiguration.variantTypes['S12Vblue'], 255.2, 127.6, "Resources/Img/Tracks/switchStraightRight-12Vblue.png"),
+				new Variant(ShapeConfiguration.variantTypes['S45Vblue'], 255.2, 127.6, "Resources/Img/Tracks/switchStraightRight-4-5Vblue.png")
 			]
 		),
 		railCrossing: new ShapeType(
@@ -75,7 +85,9 @@ class ShapeConfiguration {
 				new Variant(ShapeConfiguration.variantTypes['Default'], 127.6, 127.6, "Resources/Img/Tracks/crossingStraight-Default.png"),
 				new Variant(ShapeConfiguration.variantTypes['FoundationLess'], 127.6, 127.6, "Resources/Img/Tracks/crossingStraight-FoundationLess.png"),
 				new Variant(ShapeConfiguration.variantTypes['S12V'], 127.6, 127.6, "Resources/Img/Tracks/crossingStraight-12V.png"),
-				new Variant(ShapeConfiguration.variantTypes['S45V'], 127.6, 127.6, "Resources/Img/Tracks/crossingStraight-4-5V.png")
+				new Variant(ShapeConfiguration.variantTypes['S45V'], 127.6, 127.6, "Resources/Img/Tracks/crossingStraight-4-5V.png"),
+				new Variant(ShapeConfiguration.variantTypes['S12Vblue'], 127.6, 127.6, "Resources/Img/Tracks/crossingStraight-12Vblue.png"),
+				new Variant(ShapeConfiguration.variantTypes['S45Vblue'], 127.6, 127.6, "Resources/Img/Tracks/crossingStraight-4-5Vblue.png")
 			]
 		),
 		railRoadCrossing: new ShapeType(
