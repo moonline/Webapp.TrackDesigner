@@ -30,6 +30,10 @@ class Layout extends Observable implements Observer {
 	public getHeight(): number {
 		return this.height;
 	}
+
+	public getShapes(): Shape[] {
+		return this.shapes;
+	}
 	
 	public getCurrentElement(): any {
 		return this.currentElement;
@@ -200,6 +204,23 @@ class Layout extends Observable implements Observer {
 		} else {
 			this.notifyObservers(event, subject);
 		}
+	}
+
+	private getSerializedShapes(): Object[] {
+		var serializedShapes: Object[] = [];
+		for(var si in this.shapes) {
+			serializedShapes.push(this.shapes[si].serialize());
+		}
+		return serializedShapes;
+	}
+
+	public serialize(): Object {
+		return {
+			class: 'Classes/Domain/Model/Layout',
+			width: this.getWidth(),
+			height: this.getHeight(),
+			shapes: this.getSerializedShapes()
+		};
 	}
 }
 

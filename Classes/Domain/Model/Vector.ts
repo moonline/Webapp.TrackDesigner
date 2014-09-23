@@ -56,6 +56,15 @@ class Vector {
 	public getDeltaY(startAngle: number = 0): number {
 		return this.length*Math.sin((startAngle+this.angle)*2*Math.PI);
 	}
+
+	public serialize(): Object {
+		return {
+			class: 'Classes/Domain/Model/Vector',
+			length: this.length,
+			angle: this.angle,
+			pointOrientation: this.pointOrientation
+		};
+	}
 }
 
 export = Vector;

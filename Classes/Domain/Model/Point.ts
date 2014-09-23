@@ -100,6 +100,15 @@ class Point {
 	public toString(): string {
 		return this.x+"/"+this.y+"/"+this.angle;
 	}
+
+	public serialize(): Object {
+		return {
+			class: 'Classes/Domain/Model/Point',
+			x: this.x,
+			y: this.y,
+			angle: this.angle
+		};
+	}
 }
 
 export = Point;

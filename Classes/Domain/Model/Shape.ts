@@ -222,6 +222,15 @@ class Shape extends Observable {
 		}
 		return null;
 	}
+
+	public serialize(): Object {
+		return {
+			class: 'Classes/Domain/Model/Shape',
+			type: this.type.getName(),
+			variant: this.variant.getType().getName(),
+			center: this.center.serialize()
+		};
+	}
 }
 
 export = Shape;
