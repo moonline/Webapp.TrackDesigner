@@ -26,6 +26,11 @@ body { font-family: Ubuntu, Arial, Helvetica, sans-serif; background: gainsboro;
 		
 			.mainMenu .menuItem { color: white; }
 			.mainMenu .menuItem svg.icon { height: 3rem; width: auto; }
+			.mainMenu #buttonOpen.menuItem {
+				-moz-appearance: none; text-indent: 5rem; background-size: 3rem; background-position: 1rem 1rem; background-repeat: no-repeat;
+				background-image: url("data:image/svg+xml;utf8,<svg version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='512px' height='512px' viewBox='0 0 512 512' enable-background='new 0 0 512 512' xml:space='preserve'><path fill='white' d='M416,480l96-256H96L0,480H416z M64,192L0,480V64h144l64,64h208v64H64z'/></svg>");
+			}
+			.mainMenu #buttonOpen.menuItem:hover, .mainMenu #buttonOpen.menuItem:active { opacity: 0.5; }
 			
 	.page #main { display: flex; flex-direction: column; height: 100%; }
 		

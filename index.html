@@ -10,20 +10,36 @@
 		<!-- styles -->
 		<link href="Resources/Styles/browserReset.css" type="text/css" rel="stylesheet" />
 		<link href="Resources/Styles/app.css" type="text/css" rel="stylesheet" />
+
+		<script src="Lib/FileSaver.js"></script>
 	</head>
 	<body data-ng-view>
 		<div class="page">
 			<header>
 				<h1>Track designer</h1>
 				<div class="mainMenu">
+					<input id="buttonOpen" class="menuItem" title="Open file"
+						   type="file" accept="application/json" name="loadFile" value="Open file">
+					</input>
+					<button id="buttonSave"  class="menuItem" title="Save" >
+						<svg class="icon"  clip-rule="evenodd" fill-rule="evenodd" image-rendering="optimizeQuality" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 5000 5000" xmlns="http://www.w3.org/2000/svg">
+							<defs><style type="text/css">
+								<![CDATA[
+    							.str0 {stroke:#FFFFFF;stroke-width:100}
+								.fil0 {fill:#FFFFFF}
+								.fil1 {fill:#FFFFFF}
+								]]>
+							</style></defs>
+							<g id="Layer_x0020_1">
+								<path class="fil0" d="M600 3900h3800c110 0 200 90 200 200v400c0 110-90 200-200 200h-3800c-110 0-200-90-200-200v-400c0-110 90-200 200-200zm3209 200h400c55 0 100 45 100 100s-45 100-100 100h-400c-55 0-100-45-100-100s45-100 100-100zm-809 0h400c55 0 100 45 100 100s-45 100-100 100h-400c-55 0-100-45-100-100s45-100 100-100z"/>
+								<path class="fil1 str0" d="M2701 3499l1000-1000c50-50 100-100 100-200s-100-200-200-200h-500c-50 0-100-50-100-100v-1499c0-50-50-100-100-100h-800c-50 0-100 50-100 100v1499c0 50-50 100-100 100h-500c-100 0-200 100-200 200s50 150 100 200l1000 1000c135 135 265 135 400 0z"/>
+							</g></svg>
+						<span class="label">Save layout</span>
+					</button>
 					<button id="buttonExport" class="menuItem" title="Export layout (png)">
 						<img class="icon" src="Resources/Img/icon-export.png" />
 						<span class="label">Export layout (png)</span>
 					</button>
-					<!--<button id="buttonSave" class="menuItem" title="Save layout ">
-						<img class="icon" src="Resources/Img/icon-save.png" />
-						<span class="label">Save layout</span>
-					</button>-->
 					<button id="buttonManual" class="menuItem" title="Manual" onclick="window.open('Documentation/index.html');">
 						<svg class="icon" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="20.773px" height="20.773px" viewBox="0 0 20.773 20.773" enable-background="new 0 0 20.773 20.773" xml:space="preserve">
 							<g>
@@ -35,11 +51,7 @@
 									C8.923,5.379,9.521,6.029,10.446,6.022z" />
 							</g>
 						</svg>
-						<span class="label">Save layout</span>
 					</button>
-					
-
-
 				</div>		
 			</header>
 			<div class="main" id="main">

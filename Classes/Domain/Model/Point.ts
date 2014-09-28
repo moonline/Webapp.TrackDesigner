@@ -109,6 +109,30 @@ class Point {
 			angle: this.angle
 		};
 	}
+
+	public static isSerializedStructureValid(structure: Object, errors: string[] = []): boolean {
+		var valid: boolean[] = [
+			typeof structure != "undefined",
+			structure['class'] === 'Classes/Domain/Model/Point',
+			typeof structure['x'] === "number",
+			typeof structure['y'] === "number",
+			typeof structure['angle'] === "number"
+		];
+		if(valid.indexOf(false) >= 0) {
+			errors.push('Point property not valid [structure, class, x, y,  angle]:('+valid.toString()+')');
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public static unserialize(structure: Object, errors: string[]) {
+		if(Point.isSerializedStructureValid(structure)) {
+			return new Point(structure['x'], structure['y'], structure['angle'] % 1);
+		} else {
+			return null;
+		}
+	}
 }
 
 export = Point;

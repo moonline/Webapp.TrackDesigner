@@ -1,14 +1,14 @@
 import Layout = require("Classes/Domain/Model/Layout");
 
 
-class ExportController {
+class ExportService {
 	layout: Layout;
 
 	constructor(layout: Layout) {
 		this.layout = layout;
 	}
 
-	public export(): Object {
+	public getExportStructure(): Object {
 		return {
 			date: Date.now(),
 			format: {
@@ -30,3 +30,5 @@ class ExportController {
 		};
 	}
 }
+
+export = ExportService;
