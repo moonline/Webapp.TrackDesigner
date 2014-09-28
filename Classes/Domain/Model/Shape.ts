@@ -3,9 +3,12 @@ import ConnectionPoint = require("Classes/Domain/Model/ConnectionPoint");
 import Vector = require("Classes/Domain/Model/Vector");
 import ShapeType = require("Classes/Domain/Model/ShapeType");
 import Variant = require("Classes/Domain/Model/Variant");
+import VariantType = require("Classes/Domain/Model/VariantType");
 
 import Observable = require("Classes/Utility/Observable");
 import EventType = require("Classes/Utility/EventType");
+
+import ShapeConfiguration = require("Configuration/ShapeConfiguration");
 
 class Shape extends Observable {
 	public static createFromConnectionPoint(type: ShapeType, variant: Variant, connectionPoint: ConnectionPoint): Shape {
@@ -221,6 +224,56 @@ class Shape extends Observable {
 			}
 		}
 		return null;
+	}
+
+	public serialize(): Object {
+		return {
+			class: 'Classes/Domain/Model/Shape',
+			type: this.type.getId(),
+			variant: this.variant.getType().getId(),
+			center: this.center.serialize()
+		};
+	}
+
+	public static isSerializedStructureValid(structure: Object, errors: string[] = []):boolean {
+		var valid: boolean[] = [
+			typeof structure != "undefined",
+			structure['class'] === 'Classes/Domain/Model/Shape',
+			typeof structure['variant'] === "string" ,
+			typeof ShapeConfiguration.variantTypes[structure['variant']] != "undefined",
+			typeof structure['type'] === "string",
+			typeof ShapeConfiguration.shapeTypes[structure['type']] != "undefined",
+			typeof structure['center'] === "object",
+			Point.isSerializedStructureValid(structure['center'], errors)
+		];
+		if(valid.indexOf(false) >= 0) {
+			errors.push('Shape property not valid [structure, class, variant, variant exists, type, type exists, center, center valid]:('+valid.toString()+')');
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public static unserialize(structure: Object, errors: string[]): Shape {
+		if(Shape.isSerializedStructureValid(structure)) {
+
+			var shapeType: ShapeType = ShapeConfiguration.shapeTypes[structure['type']];
+			var shapeVariants = shapeType.getVariants();
+			var variant: Variant;
+			for(var vi in shapeVariants) {
+				if((shapeVariants[vi]).getType().getId() === structure['variant']) {
+					variant = shapeVariants[vi];
+					break;
+				}
+			}
+			if(variant) {
+				return new Shape(ShapeConfiguration.shapeTypes[structure['type']], variant, Point.unserialize(structure['center'], errors));
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
 	}
 }
 

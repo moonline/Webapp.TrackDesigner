@@ -30,6 +30,10 @@ class Layout extends Observable implements Observer {
 	public getHeight(): number {
 		return this.height;
 	}
+
+	public getShapes(): Shape[] {
+		return this.shapes;
+	}
 	
 	public getCurrentElement(): any {
 		return this.currentElement;
@@ -199,6 +203,60 @@ class Layout extends Observable implements Observer {
 		if(event === EventType.objectMoved && subject instanceof Shape) {		
 		} else {
 			this.notifyObservers(event, subject);
+		}
+	}
+
+	private getSerializedShapes(): Object[] {
+		var serializedShapes: Object[] = [];
+		for(var si in this.shapes) {
+			serializedShapes.push(this.shapes[si].serialize());
+		}
+		return serializedShapes;
+	}
+
+	public serialize(): Object {
+		return {
+			class: 'Classes/Domain/Model/Layout',
+			width: this.getWidth(),
+			height: this.getHeight(),
+			shapes: this.getSerializedShapes()
+		};
+	}
+
+	public static isSerializedStructureValid(structure: Object, errors: string[] = []) {
+		var valid: boolean[] = [
+			typeof structure != "undefined",
+			structure['class'] === 'Classes/Domain/Model/Layout',
+			typeof structure['width'] === "number",
+			typeof structure['height'] === "number",
+			Array.isArray(structure['shapes'])
+		];
+		if(valid.indexOf(false) >= 0) {
+			errors.push('Layout property not valid [structure, class, width, height, shapes list]:('+valid.toString()+')');
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public static unserialize(structure: Object, errors: string[]): Layout {
+		if(Layout.isSerializedStructureValid(structure)) {
+			var layout: Layout = new Layout();
+
+			layout.width = structure['width'];
+			layout.height = structure['height'];
+			layout.currentElement = this;
+			layout.lastInsertedShape = null;
+			layout.shapes = [];
+
+			for(var si in structure['shapes']) {
+				if(Shape.isSerializedStructureValid(structure['shapes'][si], errors)) {
+					layout.addShape(Shape.unserialize(structure['shapes'][si], errors));
+				}
+			}
+			return layout;
+		} else {
+			return null;
 		}
 	}
 }

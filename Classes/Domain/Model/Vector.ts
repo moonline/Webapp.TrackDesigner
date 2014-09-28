@@ -56,6 +56,39 @@ class Vector {
 	public getDeltaY(startAngle: number = 0): number {
 		return this.length*Math.sin((startAngle+this.angle)*2*Math.PI);
 	}
+
+	public serialize(): Object {
+		return {
+			class: 'Classes/Domain/Model/Vector',
+			length: this.length,
+			angle: this.angle,
+			pointOrientation: this.pointOrientation
+		};
+	}
+
+	public static isSerializedStructureValid(structure: Object, errors: string[] = []): boolean {
+		var valid: boolean[] = [
+			typeof structure != "undefined",
+			structure['class'] === 'Classes/Domain/Model/Vector',
+			typeof structure['length'] === "number",
+			typeof structure['angle'] === "number",
+			typeof structure['pointOrientation'] === "number"
+		];
+		if(valid.indexOf(false) >= 0) {
+			errors.push('Vector property not valid [structure, class, length, angle, pointOrientation]:('+valid.toString()+')');
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public static unserialize(structure: Object, errors: string[]) {
+		if(Vector.isSerializedStructureValid(structure)) {
+			return new Vector(structure['length'], structure['angle']%1, structure['pointOrientation']);
+		} else {
+			return null;
+		}
+	}
 }
 
 export = Vector;

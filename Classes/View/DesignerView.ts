@@ -11,7 +11,7 @@ import Observer = require("Classes/Utility/Observer");
 import Observable = require("Classes/Utility/Observable");
 import EventType = require("Classes/Utility/EventType");
 
-class DesignerView implements Observer {
+class DesignerView extends Observable implements Observer {
 	viewConfig: any;
 	factor: number;
 	elements: { [index: string]: HTMLElement; } = {};	
@@ -21,20 +21,22 @@ class DesignerView implements Observer {
 	variantTypes: { [index: string]: VariantType; } = {};
 	
 	constructor(layout: Layout, shapeTypes: { [index: string]: ShapeType; }, variantTypes: { [index: string]: VariantType; }) {
+		super();
 		this.viewConfig = {
 			shapePointSize: 50,
 			connectionPointSize: 15,
 			connectedPointSize: 2,
 			freePointSize: 15
-		}
-	
-		this.layout = layout;
-		this.layout.addObserver(this);
+		};
+		this.setLayout(layout);
 		this.shapeTypes = shapeTypes;
 		this.variantTypes = variantTypes
 		this.factor = 0.5;
-		
-		this.initializeView();
+	}
+
+	public setLayout(layout: Layout): void {
+		this.layout = layout;
+		this.layout.addObserver(this);
 	}
 
 	private initializeUiElement(elementId: string): HTMLElement {
@@ -98,7 +100,7 @@ class DesignerView implements Observer {
 		}
 	}
 	
-	private initializeView(): void {
+	public initializeView(): void {
 		var canvasElement: HTMLElement = <HTMLElement>document.getElementById('layoutArea');
 		this.elements['canvas'] = canvasElement;
 
@@ -165,6 +167,19 @@ class DesignerView implements Observer {
 		
 		this.initializeUiElement('buttonExport').addEventListener('click', function(event) {
 			this.exportLayout();
+		}.bind(this));
+
+		this.initializeUiElement('buttonSave').addEventListener('click', function(event) {
+			this.notifyObservers(EventType.actionCall,{action:"save"});
+		}.bind(this));
+
+		this.initializeUiElement('buttonOpen').addEventListener('change', function(event) {
+			// change to tab with all chapes because crappy browser won't render other shape image in canvas, change back after
+			(<HTMLSelectElement>document.getElementById('variantTypes')).value = 'all';
+			this.createShapeTypesMenu();
+			this.notifyObservers(EventType.actionCall,{action:"open", file: event.target.files[0] });
+			(<HTMLSelectElement>document.getElementById('variantTypes')).value = 'Default';
+			this.createShapeTypesMenu();
 		}.bind(this));
 		
 		this.initializeUiElement('moveToFront').addEventListener('click', function(event) {
@@ -298,9 +313,12 @@ class DesignerView implements Observer {
 	}
 	
 	public notify(event: EventType, notifier: Observable, subject: any) {
-		if(event === EventType.objectResized && subject instanceof Layout) {
+		if(event === EventType.objectResized && subject instanceof Layout || event === EventType.objectReplaced && subject instanceof Layout) {
 			(<HTMLCanvasElement>this.elements['canvas']).width = this.layout.getWidth()*this.factor;
 			(<HTMLCanvasElement>this.elements['canvas']).height = this.layout.getHeight()*this.factor;
+		}
+		if(event === EventType.objectReplaced && subject instanceof Layout) {
+			this.draw();
 		}
 	
 		this.draw();

@@ -3,6 +3,8 @@ import Variant = require("Classes/Domain/Model/Variant");
 import VariantType = require("Classes/Domain/Model/VariantType");
 
 class ShapeType {
+	// unique id
+	id: string;
 	name: string;	
 	defaultFirstConnectionPointPosition: number;
 	
@@ -16,7 +18,8 @@ class ShapeType {
 	 * @param {Vector[]} connectionPoints - A list with vectors describing the connection points from the center
 	 * @param {Variant[]} variants - A list with variants for this type, e.q. 12v, 4.5v, ...
 	 */
-	constructor(name: string, connectionPoints: Vector[] = [], variants: Variant[] = []) {
+	constructor(id: string, name: string, connectionPoints: Vector[] = [], variants: Variant[] = []) {
+		this.id = id;
 		this.name = name;
 		this.connectionPoints = connectionPoints;
 		this.variants = variants;
@@ -25,6 +28,10 @@ class ShapeType {
 	
 	public getName(): string {
 		return this.name;
+	}
+
+	public getId(): string {
+		return this.id;
 	}
 	
 	public getVariants(): Variant[] {
