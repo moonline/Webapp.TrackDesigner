@@ -47,7 +47,7 @@ class ShapeConfiguration {
 			'Rail straight half',
 			[new Vector(31.9, 0.0, 0.0), new Vector(31.9, 0.5, 0.5)],
 			[
-				new Variant(ShapeConfiguration.variantTypes['Default'], 83.8, 95.7, "Resources/Img/Tracks/railStraightHalf-Default.png"),
+				new Variant(ShapeConfiguration.variantTypes['Default'], 63.8, 95.7, "Resources/Img/Tracks/railStraightHalf-Default.png"),
 				new Variant(ShapeConfiguration.variantTypes['FoundationLess'], 83.8, 63.8, "Resources/Img/Tracks/railStraightHalf-FoundationLess.png"),
 				new Variant(ShapeConfiguration.variantTypes['S9V'], 63.8, 63.8, "Resources/Img/Tracks/railStraightHalf-9V.png")
 			]			
