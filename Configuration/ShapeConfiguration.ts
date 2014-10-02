@@ -14,7 +14,7 @@ class ShapeConfiguration {
 		S45Vblue: new VariantType('S45Vblue', '4.5V Series blue', 'Resources/Img/VariantTypes/4-5vBlue.png'),
 		OutboundLeft: new VariantType('OutboundLeft', 'Outbound left', 'Resources/Img/VariantTypes/outboundLeft.png'),
 		OutboundRight: new VariantType('OutboundRight', 'Outbound right', 'Resources/Img/VariantTypes/outboundRight.png'),
-		Bridge: new VariantType('Bridge', 'Bridge', 'Resources/Img/VariantTypes/bridge.png'),
+		/*Bridge: new VariantType('Bridge', 'Bridge', 'Resources/Img/VariantTypes/bridge.png'),*/
 		Tunnel: new VariantType('Tunnel', 'Tunnel', 'Resources/Img/VariantTypes/tunnel.png'),
 		TunnelPortal1: new VariantType('TunnelPortal1', 'Tunnel portal 1', 'Resources/Img/VariantTypes/tunnelPortal.png'),
 		TunnelPortal2: new VariantType('TunnelPortal2', 'Tunnel portal 2', 'Resources/Img/VariantTypes/tunnelPortal.png'),
@@ -36,7 +36,7 @@ class ShapeConfiguration {
 				new Variant(ShapeConfiguration.variantTypes['S45Vblue'], 127.6, 63.8, "Resources/Img/Tracks/railStraight-4-5Vblue.png"),
 				new Variant(ShapeConfiguration.variantTypes['OutboundLeft'], 127.6, 95.7, "Resources/Img/Tracks/railStraight-OutboundLeft.png"),
 				new Variant(ShapeConfiguration.variantTypes['OutboundRight'], 127.6, 95.7, "Resources/Img/Tracks/railStraight-OutboundRight.png"),
-				new Variant(ShapeConfiguration.variantTypes['Bridge'], 127.6, 95.7, "Resources/Img/Tracks/railStraight-Bridge.png"),
+				/*new Variant(ShapeConfiguration.variantTypes['Bridge'], 127.6, 95.7, "Resources/Img/Tracks/railStraight-Bridge.png"),*/
 				new Variant(ShapeConfiguration.variantTypes['Tunnel'], 127.6, 15.95, "Resources/Img/Tracks/railStraight-Tunnel.png"),
 				new Variant(ShapeConfiguration.variantTypes['TunnelPortal1'], 127.6, 95.7, "Resources/Img/Tracks/railStraight-TunnelPortal1.png"),
 				new Variant(ShapeConfiguration.variantTypes['TunnelPortal2'], 127.6, 95.7, "Resources/Img/Tracks/railStraight-TunnelPortal2.png")
@@ -69,14 +69,16 @@ class ShapeConfiguration {
 				new Variant(ShapeConfiguration.variantTypes['Tunnel'], 136.9144, 69.9295, "Resources/Img/Tracks/railCurved-Tunnel.png")
 			]	
 		),
-		/*
 		railCurvedHalf: new ShapeType(
 			'railCurvedHalf',
 			'Rail curved half',
-			[],
-			[new Variant(ShapeConfiguration.variantTypes['Default'], ?, ?, "Resources/Img/Tracks/railCurvedHalf-Default.png")]
+			[new Vector(31.27975, 1-0.00391, 1-0.01563), new Vector(31.27974, 0.5+0.00391, 0.5+0.01563)],
+			[
+				new Variant(ShapeConfiguration.variantTypes['Default'], 71.91518, 97.46648, "Resources/Img/Tracks/railCurvedHalf-Default.png"),
+				new Variant(ShapeConfiguration.variantTypes['FoundationLess'], 68.78884, 65.48968, "Resources/Img/Tracks/railCurvedHalf-FoundationLess.png"),
+				new Variant(ShapeConfiguration.variantTypes['S9V'], 68.78884, 65.48968, "Resources/Img/Tracks/railCurvedHalf-9V.png")
+			]
 		),
-		*/
 		switchStraightLeft: new ShapeType(
 			'switchStraightLeft',
 			'Switch straight left',
@@ -106,7 +108,7 @@ class ShapeConfiguration {
 		switchBranchingRight: new ShapeType(
 			'switchBranchingRight',
 			'Switch branching right',
-			[new Vector(145.01793, 0.05493, 0.0), new Vector(128.47218, 0.43763, 0.5), new Vector(134.50488, 0.56253, 0.9375)],
+			[new Vector(145.01793, 0.05493, 0.0), new Vector(128.47218, 0.43763, 0.5), new Vector(134.50488, 0.56253, 0.5+0.0625)],
 			[
 				new Variant(ShapeConfiguration.variantTypes['S9V'], 272.93159, 161.92824, "Resources/Img/Tracks/switchBranchingRight-9V.png"),
 			]
@@ -139,6 +141,7 @@ class ShapeConfiguration {
 			[new Vector(127.6, 0.0, 0.0), new Vector(127.6, 0.5, 0.5), new Vector(127.6, 0.25, 0.25), new Vector(127.6, 0.75, 0.75)],
 			[
 				new Variant(ShapeConfiguration.variantTypes['Default'], 255.2, 255.2, "Resources/Img/Tracks/railRoadCrossing-Default.png"),
+				new Variant(ShapeConfiguration.variantTypes['FoundationLess'], 255.2, 255.2, "Resources/Img/Tracks/railRoadCrossing-FoundationLess.png"),
 				new Variant(ShapeConfiguration.variantTypes['S9V'], 255.2, 255.2, "Resources/Img/Tracks/railRoadCrossing-9V.png"),
 				new Variant(ShapeConfiguration.variantTypes['S12V'], 255.2, 255.2, "Resources/Img/Tracks/railRoadCrossing-12V.png"),
 				new Variant(ShapeConfiguration.variantTypes['S45V'], 255.2, 255.2, "Resources/Img/Tracks/railRoadCrossing-4-5V.png"),
@@ -191,6 +194,7 @@ class ShapeConfiguration {
 				new Variant(ShapeConfiguration.variantTypes['FoundationLess'], 255.2, 255.2, "Resources/Img/Tracks/roadTCrossing-FoundationLess.png"),
 				new Variant(ShapeConfiguration.variantTypes['S45V'], 255.2, 255.2, "Resources/Img/Tracks/roadTCrossing-4-5V.png"),
 				new Variant(ShapeConfiguration.variantTypes['S12V'], 255.2, 255.2, "Resources/Img/Tracks/roadTCrossing-12V.png"),
+				new Variant(ShapeConfiguration.variantTypes['S9V'], 255.2, 255.2, "Resources/Img/Tracks/roadTCrossing-9V.png"),
 				new Variant(ShapeConfiguration.variantTypes['Grass'], 255.2, 255.2, "Resources/Img/Tracks/roadTCrossing-Grass.png")
 			]
 		),
@@ -203,6 +207,7 @@ class ShapeConfiguration {
 				new Variant(ShapeConfiguration.variantTypes['FoundationLess'], 255.2, 255.2, "Resources/Img/Tracks/roadCrossing-FoundationLess.png"),
 				new Variant(ShapeConfiguration.variantTypes['S45V'], 255.2, 255.2, "Resources/Img/Tracks/roadCrossing-4-5V.png"),
 				new Variant(ShapeConfiguration.variantTypes['S12V'], 255.2, 255.2, "Resources/Img/Tracks/roadCrossing-12V.png"),
+				new Variant(ShapeConfiguration.variantTypes['S9V'], 255.2, 255.2, "Resources/Img/Tracks/roadCrossing-9V.png"),
 				new Variant(ShapeConfiguration.variantTypes['Grass'], 255.2, 255.2, "Resources/Img/Tracks/roadCrossing-Grass.png")
 			]
 		),
@@ -238,7 +243,8 @@ class ShapeConfiguration {
 			'River straight',
 			[new Vector(127.6, 0.0, 0.0), new Vector(127.6, 0.5, 0.5)],
 			[
-				new Variant(ShapeConfiguration.variantTypes['Default'], 255.2, 255.2, "Resources/Img/Tracks/riverStraight-Default.png")
+				new Variant(ShapeConfiguration.variantTypes['Default'], 255.2, 255.2, "Resources/Img/Tracks/riverStraight-Default.png"),
+				new Variant(ShapeConfiguration.variantTypes['Grass'], 255.2, 255.2, "Resources/Img/Tracks/riverStraight-Grass.png")
 			]
 		),
 		riverCurved: new ShapeType(
@@ -246,7 +252,8 @@ class ShapeConfiguration {
 			'River curved',
 			[new Vector(127.6, 0.5, 0.5), new Vector(127.6, 0.75, 0.75)],
 			[
-				new Variant(ShapeConfiguration.variantTypes['Default'], 255.2, 255.2, "Resources/Img/Tracks/riverCurved-Default.png")
+				new Variant(ShapeConfiguration.variantTypes['Default'], 255.2, 255.2, "Resources/Img/Tracks/riverCurved-Default.png"),
+				new Variant(ShapeConfiguration.variantTypes['Grass'], 255.2, 255.2, "Resources/Img/Tracks/riverCurved-Grass.png")
 			]
 		),
 		riverOutfall: new ShapeType(
@@ -254,7 +261,8 @@ class ShapeConfiguration {
 			'River outfall',
 			[new Vector(127.6, 0.0, 0.0), new Vector(127.6, 0.5, 0.5), new Vector(127.6, 0.75, 0.75)],
 			[
-				new Variant(ShapeConfiguration.variantTypes['Default'], 255.2, 255.2, "Resources/Img/Tracks/riverOutfall-Default.png")
+				new Variant(ShapeConfiguration.variantTypes['Default'], 255.2, 255.2, "Resources/Img/Tracks/riverOutfall-Default.png"),
+				new Variant(ShapeConfiguration.variantTypes['Grass'], 255.2, 255.2, "Resources/Img/Tracks/riverOutfall-Grass.png")
 			]
 		)
 	}

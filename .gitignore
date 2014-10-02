@@ -8,6 +8,7 @@
 *.bak
 *.kate-swp
 .idea
+*.xoj
 
 // eclipse trash
 .project
