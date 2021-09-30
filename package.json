@@ -1,0 +1,12 @@
+{
+  "name": "Webapp.TrackDesigner",
+  "version": "1.2.3",
+  "description": "L-gauge track designer app",
+  "main": "Main.ts",
+  "repository": "https://github.com/moonline/Webapp.TrackDesigner",
+  "author": "Moonline <tobiasblaser@colvarim.ch>",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "typescript": "^4.4.3"
+  }
+}
