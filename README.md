@@ -9,7 +9,7 @@ A webapp to create and export l-gauge layouts with streets, railroads and tracks
 
 1. Download from [github.com/moonline/Webapp.Trackdesigner/releases](https://github.com/moonline/Webapp.Trackdesigner/releases)
 2. Unzip the package
-3. Open [index.html](index.html) within your webbrowser or start a local webserver with `http-server .` and open [localhost:8080](http://localhost:8080) in your webbrowser.
+3. Open [index.html](index.html) in your webbrowser or start a local webserver with `http-server .` and open [localhost:8080](http://localhost:8080) in your webbrowser.
 
 ## License
 
@@ -23,7 +23,7 @@ Install:
 
 * [Node.js](https://nodejs.org/en/download/)
 * [Yarn](https://classic.yarnpkg.com/en/docs/install)
-* Zip
+* Zip: `sudo apt install zip`
 
 ### Install dependencies
 
@@ -33,15 +33,17 @@ yarn install
 
 ### Compile source
 
-`yarn compile`
-
-### Package app
-
-1. Create a package: `zip -r Webapp.Trackdesigner.zip Webapp.TrackDesigner/ -x "*.git" "*.git*" "*.odg" "*.ts" "*.~" "*.asta" "*/Test/*"`
-2. Create a minimal manifest
-3. Deploy manifest + package to a marketplace
-
+```sh
+yarn compile
+```
 
 ### Run app
 
-Open [index.html](index.html) in your webbrowser or serve by a local webserver `http-server .`.
+Open [index.html](index.html) in your webbrowser or start a local webserver with `http-server .` and open [localhost:8080](http://localhost:8080) in your webbrowser.
+
+
+### Package app
+
+```sh
+yarn package
+```
