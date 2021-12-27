@@ -1,31 +1,35 @@
-Track designer
-==============
+# Track designer
 
-An app to create l-gauge layouts with streets, railroads and tracks.
-
-
-License
--------
-
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
+A webapp to create and export l-gauge layouts with streets, railroads and tracks.
 
 
-Download / Packaged releases
-----------------------------
+## Download release
 
-1. Download https://github.com/moonline/Webapp.Trackdesigner/releases
-2. Unzip wherever you want
-3. Open index.html with your webbrowser
-
+1. Download from [github.com/moonline/Webapp.Trackdesigner/releases](https://github.com/moonline/Webapp.Trackdesigner/releases)
+2. Unzip the package
+3. Open [index.html](index.html) within your webbrowser or start a local webserver with `http-server .` and open [localhost:8080](http://localhost:8080) in your webbrowser.
 
 
-Compile from source
--------------------
+## Development
 
-### Compile app
+### Environment
 
-1. install Node.js with tsc (TypeScript) module
-2. compile with 'tsc Main.ts --module AMD'
+Install:
+
+* [Node.js](https://nodejs.org/en/download/)
+* [Yarn](https://classic.yarnpkg.com/en/docs/install)
+* Zip
+
+### Install dependencies
+
+```sh
+yarn install
+(cd client; yarn install)
+```
+
+### Compile source
+
+`yarn compile`
 
 
 ### Package app
