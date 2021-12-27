@@ -121,6 +121,14 @@ class ShapeConfiguration {
 				new Variant(ShapeConfiguration.variantTypes['S9V'], 272.93159, 161.92824, "Resources/Img/Tracks/switchBranchingLeft-9V.png"),
 			]
 		),
+		doubleTrackDoubleCrossing: new ShapeType(
+			'doubleTrackDoubleCrossing',
+			'Double track crossing',
+			[new Vector(201.75331, 0.05121, 0.0), new Vector(201.75331, 0.5-0.05120, 0.5), new Vector(201.75331, 0.5+0.05120, 0.5), new Vector(201.755331, 1-0.05120, 0.0)],
+			[
+				new Variant(ShapeConfiguration.variantTypes['S9V'], 382.8, 191.4, "Resources/Img/Tracks/doubleTrackDoubleCrossing-9v.png")
+			]
+		),
 		railCrossing: new ShapeType(
 			'railCrossing',
 			'Crossing',
@@ -133,6 +141,15 @@ class ShapeConfiguration {
 				new Variant(ShapeConfiguration.variantTypes['S45V'], 127.6, 127.6, "Resources/Img/Tracks/crossingStraight-4-5V.png"),
 				new Variant(ShapeConfiguration.variantTypes['S12Vblue'], 127.6, 127.6, "Resources/Img/Tracks/crossingStraight-12Vblue.png"),
 				new Variant(ShapeConfiguration.variantTypes['S45Vblue'], 127.6, 127.6, "Resources/Img/Tracks/crossingStraight-4-5Vblue.png")
+			]
+		),
+		railCrossingOblique: new ShapeType(
+			'railCrossingOblique',
+			'Crossing oblique',
+			[new Vector(127.6, 1/16, 1/16), new Vector(127.6, 9/16, 9/16), new Vector(127.6, 15/16, 15/16), new Vector(127.6, 7/16, 7/16)],
+			[
+				new Variant(ShapeConfiguration.variantTypes['Default'], 272.39686, 186.07608, "Resources/Img/Tracks/crossingOblique-Default.png"),
+				new Variant(ShapeConfiguration.variantTypes['FoundationLess'], 260.18925, 156.60433, "Resources/Img/Tracks/crossingOblique-FoundationLess.png")
 			]
 		),
 		railRoadCrossing: new ShapeType(

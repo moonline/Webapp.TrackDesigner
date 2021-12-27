@@ -1,0 +1,18 @@
+{
+  "devDependencies": {
+    "http-server": "^14.0.0",
+    "typescript": "^4.5.4"
+  },
+  "scripts": {
+    "compile": "tsc Main.ts --module AMD",
+    "start": "yarn compile && http-server . -o index.html",
+    "package": "(cd .. && zip -r Webapp.Trackdesigner.zip Webapp.TrackDesigner/ -x '*/node_modules/*' -x '*.git' '*.git*' '*.odg' '*.ts' '*.~' '*.asta' '*/Test/*' -x '*/yarn.lock' -x '*/yarn-error*' -x '*/package.json' -x '*/todo.txt')"
+  },
+  "name": "TrackDesigner",
+  "version": "1.3.0",
+  "description": "A webapp to create and export l-gauge layouts with streets, railroads and tracks",
+  "main": "Main.js",
+  "repository": "https://github.com/moonline/Webapp.Trackdesigner",
+  "author": "Moonline <moonline@users.noreply.github.com>",
+  "license": "GPL-3.0"
+}
