@@ -7,12 +7,12 @@
     "test": "truffle test",
     "compile": "tsc Main.ts --module AMD",
     "start": "yarn compile && http-server . -o index.html",
-    "package": "(cd .. && zip -r Webapp.Trackdesigner.zip Webapp.TrackDesigner/ -x '*.git' '*.git*' '*.odg' '*.ts' '*.~' '*.asta' '*/Test/*')
+    "package": "(cd .. && zip -r Webapp.Trackdesigner.zip Webapp.TrackDesigner/ -x '*/node_modules/*' -x '*.git' '*.git*' '*.odg' '*.ts' '*.~' '*.asta' '*/Test/*' -x '*/yarn.lock' -x '*/yarn-error*' -x '*/package.json' -x '*/todo.txt')"
   },
   "name": "TrackDesigner",
   "version": "1.2.2",
   "description": "A webapp to create and export l-gauge layouts with streets, railroads and tracks",
-  "main": "main.ts",
+  "main": "Main.js",
   "repository": "https://github.com/moonline/Webapp.Trackdesigner",
   "author": "Moonline <moonline@users.noreply.github.com>",
   "license": "GPL2.0"
