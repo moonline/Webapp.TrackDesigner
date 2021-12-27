@@ -4,7 +4,6 @@
     "typescript": "^4.5.4"
   },
   "scripts": {
-    "test": "truffle test",
     "compile": "tsc Main.ts --module AMD",
     "start": "yarn compile && http-server . -o index.html",
     "package": "(cd .. && zip -r Webapp.Trackdesigner.zip Webapp.TrackDesigner/ -x '*/node_modules/*' -x '*.git' '*.git*' '*.odg' '*.ts' '*.~' '*.asta' '*/Test/*' -x '*/yarn.lock' -x '*/yarn-error*' -x '*/package.json' -x '*/todo.txt')"
